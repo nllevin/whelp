@@ -45,7 +45,7 @@ class SessionForm extends React.Component {
         : <b onClick={() => this.props.history.push('/signup')}>Sign Up</b>}</p>
         <p className="legal-copy">
         {isSignup ? /* legal copy text */
-          "By continuing, you agree to Yelp’s Terms of Service and acknowledge Yelp’s Privacy Policy."
+          "By continuing, you agree to Whelp’s Terms of Service and acknowledge Whelp’s Privacy Policy."
         : "By logging in, you agree to Whelp's Terms of Service and Privacy Policy."
         }</p>
       </div>
