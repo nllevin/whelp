@@ -6,6 +6,10 @@ import jwt_decode from 'jwt-decode';
 import { setAuthToken } from './util/session_api_util';
 import { logout } from './actions/session_actions';
 
+// FOR TESTING ONLY
+import { signup, login } from "./actions/session_actions";
+/////////////////
+
 document.addEventListener('DOMContentLoaded', () => {
   let store;
   if (localStorage.jwtToken) {
@@ -22,6 +26,14 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     store = configureStore();
   }
+
+  //FOR TESTING
+  window.getState = store.getState;
+  window.dispatch = store.dispatch;
+  window.signup = signup;
+  window.login = login;
+  window.logout = logout;
+  /////////////
 
   const root = document.getElementById("root");
   ReactDOM.render(<Root store={store} />, root);
