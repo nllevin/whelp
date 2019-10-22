@@ -1,4 +1,5 @@
-import React from 'react';
+import React from "react";
+import { withRouter } from "react-router-dom";
 
 class SessionForm extends React.Component {
   constructor(props) {
@@ -41,7 +42,7 @@ class SessionForm extends React.Component {
           "Connect with great local businesses"
         : "New to Whelp?"
         }{isSignup ? null /* button display */
-        : <b>Sign Up</b>}</p>
+        : <b onClick={() => this.props.history.push('/signup')}>Sign Up</b>}</p>
         <p className="legal-copy">
         {isSignup ? /* legal copy text */
           "By continuing, you agree to Yelp’s Terms of Service and acknowledge Yelp’s Privacy Policy."
@@ -99,12 +100,21 @@ class SessionForm extends React.Component {
             /> : null}
           <input /* submit button */
             type="submit"
-            value={isSignup ? "Sign Up" : "Log In"}
+            value={isSignup ? /* submit button message */
+              "Sign Up" : "Log In"}
           />
         </form>
+        <div className="session-form-subtext-container"> {/* display other choice at bottom of form */}
+          <small className="session-form-subtle-text">
+            {isSignup ? "Already on Whelp?" : "New to Whelp?"}
+            <b onClick={() => this.props.history.push(`/${isSignup ? 'login' : 'signup'}`)}>
+              {isSignup ? "Log In" : "Sign Up"} 
+            </b>
+          </small>
+        </div>
       </div>
     )
   }
 }
 
-export default SessionForm;
+export default withRouter(SessionForm);
