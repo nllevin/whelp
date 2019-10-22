@@ -55,7 +55,9 @@ class SessionForm extends React.Component {
       <div className="session-form-errors-container">
         <ul className="session-form-errors-list">
           {errors.map((error, idx) => 
-            <li key={`session-error-${idx}`}>{error}</li>)}
+            <li key={`session-error-${idx}`} className={isSignup ? "signup-error" : "login-error"}>
+              {error} <b onClick={() => this.props.clearErrors()}>X</b>
+            </li>)}
         </ul>
       </div>
     )
