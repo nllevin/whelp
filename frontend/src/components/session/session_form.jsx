@@ -70,6 +70,7 @@ class SessionForm extends React.Component {
               type="text" 
               value={this.state.firstName}
               onChange={this.update('firstName')}
+              placeholder='First Name'
               required
             /> : null}
           {isSignup ? /* last name field display */
@@ -77,18 +78,21 @@ class SessionForm extends React.Component {
               type="text"
               value={this.state.lastName}
               onChange={this.update('lastName')}
+              placeholder='Last Name'
               required
             /> : null}
           <input /* email field */
             type="email"
             value={this.state.email}
             onChange={this.update('email')}
+            placeholder='Email'
             required
           />
           <input /* password field */
             type="password"
             value={this.state.password}
             onChange={this.update('password')}
+            placeholder='Password'
             required
           /> {/* add password strength bar later */}
           {isSignup ? /* zipcode field display */
@@ -96,6 +100,7 @@ class SessionForm extends React.Component {
               type="text"
               value={this.state.zipCode}
               onChange={this.update('zipCode')}
+              placeholder='ZIP Code'
               required
             /> : null}
           <input /* submit button */
