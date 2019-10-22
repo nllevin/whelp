@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class SessionForm extends React.Component {
   constructor(props) {
@@ -42,7 +42,7 @@ class SessionForm extends React.Component {
           "Connect with great local businesses"
         : "New to Whelp?"
         }{isSignup ? null /* button display */
-        : <b onClick={() => this.props.history.push('/signup')}>Sign Up</b>}</p>
+        : <Link to='/signup'>Sign Up</Link>}</p>
         <p className="legal-copy">
         {isSignup ? /* legal copy text */
           "By continuing, you agree to Whelp’s Terms of Service and acknowledge Whelp’s Privacy Policy."
@@ -56,7 +56,7 @@ class SessionForm extends React.Component {
         <ul className="session-form-errors-list">
           {errors.map((error, idx) => 
             <li key={`session-error-${idx}`} className={isSignup ? "signup-error" : "login-error"}>
-              {error} <b onClick={() => this.props.clearErrors()}>X</b>
+              {error} <button onClick={() => this.props.clearErrors()}>X</button>
             </li>)}
         </ul>
       </div>
@@ -114,9 +114,9 @@ class SessionForm extends React.Component {
         <div className="session-form-subtext-container"> {/* display other choice at bottom of form */}
           <small className="session-form-subtle-text">
             {isSignup ? "Already on Whelp?" : "New to Whelp?"}
-            <b onClick={() => this.props.history.push(`/${isSignup ? 'login' : 'signup'}`)}>
+            <Link to={`/${isSignup ? 'login' : 'signup'}`}>
               {isSignup ? "Log In" : "Sign Up"} 
-            </b>
+            </Link>
           </small>
         </div>
       </div>
@@ -124,4 +124,4 @@ class SessionForm extends React.Component {
   }
 }
 
-export default withRouter(SessionForm);
+export default SessionForm;
