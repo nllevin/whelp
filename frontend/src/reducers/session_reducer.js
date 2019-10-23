@@ -5,7 +5,7 @@ import {
 
 const initialState = {
   isAuthenticated: false,
-  currentUserID: null
+  currentUserId: null
 };
 
 const sessionReducer = (state = initialState, action) => {

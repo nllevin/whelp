@@ -1,12 +1,14 @@
 import React from 'react';
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
 import { Switch } from 'react-router-dom';
-import HeaderNav from './header_nav/header_nav';
+
+import LoginForm from './session/login_container';
+import SignupForm from './session/signup_container';
 
 const App = () => (
   <Switch>
-    <HeaderNav />
-
+    <AuthRoute path='/login' component={LoginForm} />
+    <AuthRoute path='/signup' component={SignupForm} />
   </Switch>
 );
 
