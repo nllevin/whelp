@@ -11,18 +11,26 @@ class SessionForm extends React.Component {
       lastName: '',
       email: '',
       password: '',
-      zipCode: ''
+      zipCode: '',
+      submitting: false,
+      redBorder: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    this._ismounted = true;
+  }
+
   componentWillUnmount() {
     this.props.clearErrors();
+    this._ismounted = false;
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.processForm(this.state);
+    this.setState({submitting: true}, 
+    () => this.props.processForm(this.state).then(() => this._ismounted && this.props.formType === 'login' ? this.setState({submitting: false, redBorder: true}) : this.setState({submitting: false})));
   }
 
   update(field) {
@@ -89,18 +97,22 @@ class SessionForm extends React.Component {
               </div>
             ) : null}
             <input /* email field */
+              className={this.state.redBorder ? 'red-border' : null}
               type="email"
               value={this.state.email}
               onChange={this.update('email')}
               placeholder='Email'
               required
+              disabled={this.props.formType === 'login' && this.state.submitting}
             />
             <input /* password field */
+              className={this.state.redBorder ? 'red-border' : null}
               type="password"
               value={this.state.password}
               onChange={this.update('password')}
               placeholder='Password'
               required
+              disabled={this.props.formType === 'login' && this.state.submitting}
             /> {/* add password strength bar later */}
             {isSignup ? /* zipcode field display */
               <input 

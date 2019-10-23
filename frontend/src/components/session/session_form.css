@@ -30,6 +30,15 @@
   margin-bottom: 9px;
 }
 
+.session-form > input:disabled {
+  background-color: #f5f5f5;
+  -webkit-text-fill-color: #999;
+}
+
+.red-border {
+  border-color: #d32323 !important;
+}
+
 #session-form-zip-code {
   margin-top: 9px;
 }
