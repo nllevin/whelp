@@ -1,0 +1,47 @@
+.header-nav-container {
+  background-color: #d32323;
+  min-width: 1020px;
+  height: 64px;
+}
+
+.header-nav {
+  padding: 14px 15px;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 990px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.whelp-logo {
+  display: flex;
+  position: relative;
+  top: -2px;
+  cursor: pointer;
+}
+
+.whelp-logo span {
+  font-weight: 700;
+  text-shadow: 
+    2px 2px 2px white, 
+    2px -2px 2px white, 
+    -2px 2px 2px white, 
+    -2px -2px 2px white, 
+    2px 0 2px white, 
+    0 2px 2px white, 
+    -2px 0 2px white, 
+    0 -2px 2px white;
+  position: relative;
+  top: 9px;
+  left: 1px;
+  font-size: 24px;
+}
+
+.y-icon {
+  background-image: url("../../public/y-icon.png");
+  height: 35px;
+  width: 28px;
+  background-size: 154px 66px;
+  background-position: 45px -14px;
+}

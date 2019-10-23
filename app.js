@@ -8,6 +8,7 @@ const passport = require("passport");
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(express.static("frontend/src/public"));
 
 mongoose
   .connect(db, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
