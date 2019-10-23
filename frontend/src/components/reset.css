@@ -1,0 +1,18 @@
+html, head, body, div, header, a, i, span, input, button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  text-decoration: none;
+  list-style: none;
+  cursor: inherit;
+  display: block;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
