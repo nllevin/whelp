@@ -104,6 +104,10 @@ input.session-form-submit-button {
   background-color: #dc4f4f;
 }
 
+.session-form-submit-button:focus {
+  opacity: 0.5;
+}
+
 .session-form-subtext-container {
   display: flex;
   justify-content: flex-end;
