@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const db = require('./keys').mongoURI;
 const User = require('../models/User');
 const faker = require('faker');
+const bcrypt = require('bcryptjs');
 
 const seed = async function() {
   await mongoose
@@ -19,6 +20,7 @@ const seed = async function() {
     password: "hunter2"
   });
 
+  demoUser.password = bcrypt.hashSync(demoUser.password, bcrypt.genSaltSync(10));
   await demoUser.save();
 
   for (let i = 0; i < 5; i++) {
@@ -29,7 +31,9 @@ const seed = async function() {
       zipCode: faker.address.zipCode(),
       password: "password"
     });
-    await newUser.save()
+
+    newUser.password = bcrypt.hashSync(newUser.password, bcrypt.genSaltSync(10));
+    await newUser.save();
   }
 
   mongoose.disconnect();
