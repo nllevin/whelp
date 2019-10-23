@@ -64,7 +64,7 @@ class SessionForm extends React.Component {
     const errorsList = Object.keys(errors).length > 0 ? (
       <div className="session-form-errors-container">
         <div className="session-form-error">
-          {Object.values(errors)[0]} <button onClick={() => this.props.clearErrors()}>×</button>
+          {Object.values(errors)[Object.keys(errors).length - 1]} <button onClick={() => this.props.clearErrors()}>×</button>
         </div>
       </div>
     ) : null;
@@ -94,7 +94,7 @@ class SessionForm extends React.Component {
               </div>
             ) : null}
             <input /* email field */
-              className={this.state.redBorder ? 'red-border' : null}
+              className={this.state.redBorder || errors['email'] ? 'red-border' : null}
               type="email"
               value={this.state.email}
               onChange={this.update('email')}
@@ -112,7 +112,8 @@ class SessionForm extends React.Component {
               disabled={this.props.formType === 'login' && this.state.submitting}
             /> {/* add password strength bar later */}
             {isSignup ? /* zipcode field display */
-              <input 
+              <input
+                className={errors['zipCode'] ? 'red-border' : null}
                 type="text"
                 value={this.state.zipCode}
                 onChange={this.update('zipCode')}
