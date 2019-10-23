@@ -24,7 +24,7 @@
   flex-direction: column;
   min-width: 300px;
   max-width: 300px;
-  margin: 30px 116.43px;
+  margin: 45px 116.43px;
 }
 
 .session-form > input, .session-form-name-container > input {
@@ -39,12 +39,28 @@
   margin-bottom: 9px;
 }
 
+.session-form > input:focus, .session-form-name-container > input:focus {
+  color: #333;
+  border-color: #0073bb;
+  box-shadow: 0 0 4px rgba(0,115,187,0.3);
+}
+
+.session-form > input:disabled {
+  background-color: #f5f5f5;
+  -webkit-text-fill-color: #999;
+}
+
+input.red-border {
+  border: 2px solid #d32323;
+  color: #d32323;
+}
+
 #session-form-zip-code {
   margin-top: 9px;
 }
 
 #login {
-  margin-top: 114px;
+  margin-top: 159px;
 }
 
 .session-form-picture-container {
@@ -53,8 +69,9 @@
   padding-left: 30px;
 }
 
-.session-form-picture-container > img {
-  height: 343px;
+.y-signup-img {
+  background-image: url("../../public/y-signup-img.png");
+  height: 342px;
   width: 382px;
 }
 
@@ -81,6 +98,7 @@
 }
 
 .session-form-subheading {
+  display: flex;
   font-size: 14px;
   font-weight: bold;
   margin-bottom: 12px;
@@ -94,7 +112,7 @@
 
 .session-form-name-container > input {
   font-size: 14px;
-  width: 127px;
+  width: 147px;
 }
 
 input.session-form-submit-button {
@@ -113,6 +131,11 @@ input.session-form-submit-button {
   background-color: #dc4f4f;
 }
 
+.session-form-submit-button:focus {
+  color: white !important;
+  opacity: 0.5;
+}
+
 .session-form-subtext-container {
   display: flex;
   justify-content: flex-end;
@@ -129,6 +152,7 @@ input.session-form-submit-button {
 }
 
 .session-form-subtle-text {
+  display: flex;
   font-size: 12px;
   line-height: 1.5em;
   color: #999;
@@ -143,22 +167,39 @@ input.session-form-submit-button {
   text-decoration: underline;
 }
 
-.session-form-errors-list {
+.session-form-errors-container {
   display: flex;
   justify-content: center;
 }
 
-.session-form-errors-list > li {
+.session-form-error-banner {
   display: flex;
   justify-content: space-between;
-  font-size: 16px;
+  align-items: flex-start;
   border-radius: 3px;
-  width: 918px;
+  width: 960px;
   padding: 18px 18px 18px 24px;
-  margin-top: 10px;
+  margin-top: 11px;
   background-color: #fcd6d3;
 }
 
-.session-form-errors-list > li > button {
+.session-form-error {
+  display: flex;
+  width: 888px;
+  font-size: 16px;
+  line-height: 1.5em;
+}
+
+.session-banner-clear-errors-button {
+  font-size: 24px;
   color: #666;
+  opacity: 0.5;
+}
+
+.session-banner-clear-errors-button:hover {
+  opacity: 0.7;
+}
+
+.session-other-choice-link {
+  cursor: pointer;
 }
