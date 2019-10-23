@@ -163,27 +163,31 @@ input.session-form-submit-button {
   justify-content: center;
 }
 
-.session-form-error {
+.session-form-error-banner {
   display: flex;
   justify-content: space-between;
-  font-size: 16px;
+  align-items: flex-start;
   border-radius: 3px;
-  width: 918px;
+  width: 960px;
   padding: 18px 18px 18px 24px;
   margin-top: 11px;
   background-color: #fcd6d3;
-  align-items: center;
+}
+
+.session-form-error {
+  display: flex;
+  width: 888px;
+  font-size: 16px;
   line-height: 1.5em;
 }
 
-.session-form-error > button {
+.session-banner-clear-errors-button {
   font-size: 24px;
   color: #666;
   opacity: 0.5;
-  margin-top: -6px;
 }
 
-.session-form-error > button:hover {
+.session-banner-clear-errors-button:hover {
   opacity: 0.7;
 }
 

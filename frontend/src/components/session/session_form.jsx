@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import '../reset.css';
 import './session_form.css';
+import isEqual from 'lodash/isEqual';
 
 class SessionForm extends React.Component {
   constructor(props) {
@@ -13,13 +14,19 @@ class SessionForm extends React.Component {
       password: '',
       zipCode: '',
       submitting: false,
-      redBorder: false
+      errors: {}
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
     this._ismounted = true;
+  }
+
+  componentDidUpdate(prevProps) {
+    if (!isEqual(prevProps.errors, this.props.errors) && Object.keys(this.props.errors).length > 0) {
+      this.setState({errors: this.props.errors});
+    }
   }
 
   componentWillUnmount() {
@@ -38,7 +45,8 @@ class SessionForm extends React.Component {
   }
 
   render() {
-    const { errors, formType } = this.props;
+    const { formType } = this.props;
+    const errors = this.state.errors;
     const isSignup = formType === "signup";
     const header = (
       <div className="session-form-header">
@@ -61,11 +69,19 @@ class SessionForm extends React.Component {
       </div>
     );
 
-    const sessionError = Object.keys(errors).length > 0 ? (
+    const sessionError = Object.keys(this.props.errors).length > 0 ? (
       <div className="session-form-errors-container">
-        <div className="session-form-error">
-          {Object.values(errors)[Object.keys(errors).length - 1]} <button onClick={() => this.props.clearErrors()}>×</button>
+        <div className="session-form-error-banner">
+          <ul className="session-form-errors-list">
+          {Object.values(this.props.errors).map((error, idx) => 
+            <li key={`session-error-${idx}`} className="session-form-error">
+              <p>{error}</p>
+            </li>
+          )}
+          </ul>
+          <button className="session-banner-clear-errors-button" onClick={() => this.props.clearErrors()}>×</button>
         </div>
+        
       </div>
     ) : null;
 
@@ -94,7 +110,7 @@ class SessionForm extends React.Component {
               </div>
             ) : null}
             <input /* email field */
-              className={this.state.redBorder || errors['email'] ? 'red-border' : null}
+              className={errors['email'] || errors['loginError'] ? 'red-border' : null}
               type="email"
               value={this.state.email}
               onChange={this.update('email')}
@@ -103,7 +119,7 @@ class SessionForm extends React.Component {
               disabled={this.props.formType === 'login' && this.state.submitting}
             />
             <input /* password field */
-              className={this.state.redBorder ? 'red-border' : null}
+              className={errors['password'] || errors['loginError'] ? 'red-border' : null}
               type="password"
               value={this.state.password}
               onChange={this.update('password')}
