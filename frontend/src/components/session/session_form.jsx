@@ -61,7 +61,7 @@ class SessionForm extends React.Component {
       </div>
     );
 
-    const errorsList = Object.keys(errors).length > 0 ? (
+    const sessionError = Object.keys(errors).length > 0 ? (
       <div className="session-form-errors-container">
         <div className="session-form-error">
           {Object.values(errors)[Object.keys(errors).length - 1]} <button onClick={() => this.props.clearErrors()}>×</button>
@@ -71,7 +71,7 @@ class SessionForm extends React.Component {
 
     return (
       <div className="session-form-content-container">
-      {errorsList}
+      {sessionError}
         <div className="session-form-container">
           <form id={isSignup ? '' : 'login'} className="session-form" onSubmit={this.handleSubmit}>
             {header}
