@@ -9,10 +9,20 @@ span, article, footer, time, small {
   outline: 0;
   font: inherit;
   color: inherit;
+  background-color: transparent;
+  text-decoration: none;
+  list-style: none;
+  cursor: inherit;
+  display: block;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
   text-align: inherit;
   text-decoration: inherit;
   vertical-align: inherit;
-  box-sizing: inherit;
+  box-sizing: border-box;
   background: transparent;
 }
 
