@@ -52,7 +52,7 @@ class SessionForm extends React.Component {
           "Connect with great local businesses"
         : "New to Whelp?"
         }{isSignup ? null /* button display */
-        : <Link to='/signup'>Sign Up</Link>}</p>
+        : <Link className="session-other-choice-link" to='/signup'>Sign Up</Link>}</p>
         <p className="session-form-legal-copy">
         {isSignup ? /* legal copy text */
           "By continuing, you agree to Whelp’s Terms of Service and acknowledge Whelp’s Privacy Policy."
@@ -61,16 +61,13 @@ class SessionForm extends React.Component {
       </div>
     );
 
-    const errorsList = (
+    const errorsList = Object.keys(errors).length > 0 ? (
       <div className="session-form-errors-container">
-        <ul className="session-form-errors-list">
-          {errors.map((error, idx) => 
-            <li key={`session-error-${idx}`} className={isSignup ? "signup-error" : "login-error"}>
-              {error} <button onClick={() => this.props.clearErrors()}>×</button>
-            </li>)}
-        </ul>
+        <div className="session-form-error">
+          {Object.values(errors)[0]} <button onClick={() => this.props.clearErrors()}>×</button>
+        </div>
       </div>
-    )
+    ) : null;
 
     return (
       <div className="session-form-content-container">
@@ -132,14 +129,14 @@ class SessionForm extends React.Component {
             <div className="session-form-subtext-container"> {/* display other choice at bottom of form */}
               <small className="session-form-subtle-text">
                 {isSignup ? "Already on Whelp?" : "New to Whelp?"}
-                <Link to={`/${isSignup ? 'login' : 'signup'}`}>
+                <Link className="session-other-choice-link" to={`/${isSignup ? 'login' : 'signup'}`}>
                   {isSignup ? "Log In" : "Sign Up"} 
                 </Link>
               </small>
             </div>
           </form>
           <div className="session-form-picture-container">
-            <img src="https://s3-media4.fl.yelpcdn.com/assets/2/www/img/7922e77f338d/signup/signup_illustration.png" alt=""/>
+            <i className="y-signup-img" alt=""/>
           </div>
         </div>
       </div>
