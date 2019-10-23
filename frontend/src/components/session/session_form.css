@@ -15,7 +15,7 @@
   flex-direction: column;
   min-width: 300px;
   max-width: 300px;
-  margin: 30px 116.43px;
+  margin: 45px 116.43px;
 }
 
 .session-form > input, .session-form-name-container > input {
@@ -35,7 +35,7 @@
 }
 
 #login {
-  margin-top: 114px;
+  margin-top: 159px;
 }
 
 .session-form-picture-container {
