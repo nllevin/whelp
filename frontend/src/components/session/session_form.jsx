@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import '../reset.css';
 import './session_form.css';
+import '../header_nav/header_nav.css';
 
 class SessionForm extends React.Component {
   constructor(props) {
@@ -66,7 +67,13 @@ class SessionForm extends React.Component {
 
     return (
       <div className="session-form-content-container">
-      {errorsList}
+        <header className="session-form-header-nav">
+          <Link to="/splash" className="whelp-logo">
+            <span>whelp</span>
+            <i className="y-icon"></i>
+          </Link>
+        </header>
+        {errorsList}
         <div className="session-form-container">
           <form id={isSignup ? '' : 'login'} className="session-form" onSubmit={this.handleSubmit}>
             {header}
