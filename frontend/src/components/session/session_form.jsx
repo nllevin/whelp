@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import '../reset.css';
 import './session_form.css';
 import isEqual from 'lodash/isEqual';
+import '../header_nav/header_nav.css';
+
 
 class SessionForm extends React.Component {
   constructor(props) {
@@ -87,7 +89,13 @@ class SessionForm extends React.Component {
 
     return (
       <div className="session-form-content-container">
-      {sessionError}
+        <header className="session-form-header-nav">
+          <Link to="/splash" className="whelp-logo">
+            <span>whelp</span>
+            <i className="y-icon"></i>
+          </Link>
+        </header>
+        {sessionError}
         <div className="session-form-container">
           <form id={isSignup ? '' : 'login'} className="session-form" onSubmit={this.handleSubmit}>
             {header}
