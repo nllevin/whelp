@@ -4,6 +4,15 @@
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+.session-form-header-nav {
+  background-color: #d32323;
+  min-width: 1020px;
+  height: 64px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .session-form-container {
   display: flex;
   justify-content: center;
