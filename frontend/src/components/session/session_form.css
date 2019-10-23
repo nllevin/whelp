@@ -15,7 +15,7 @@
   flex-direction: column;
   min-width: 300px;
   max-width: 300px;
-  margin: 30px 101.43px;
+  margin: 30px 116.43px;
 }
 
 .session-form > input, .session-form-name-container > input {
@@ -41,7 +41,7 @@
 .session-form-picture-container {
   margin-top: 117px;
   width: 465px;
-  padding-left: 15px;
+  padding-left: 30px;
 }
 
 .session-form-picture-container > img {
@@ -132,4 +132,24 @@ input.session-form-submit-button {
 
 .session-form-subtle-text > a:hover {
   text-decoration: underline;
+}
+
+.session-form-errors-list {
+  display: flex;
+  justify-content: center;
+}
+
+.session-form-errors-list > li {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  border-radius: 3px;
+  width: 918px;
+  padding: 18px 18px 18px 24px;
+  margin-top: 10px;
+  background-color: #fcd6d3;
+}
+
+.session-form-errors-list > li > button {
+  color: #666;
 }

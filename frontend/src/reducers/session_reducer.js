@@ -5,7 +5,7 @@ import {
 
 const initialState = {
   isAuthenticated: false,
-  currentUserID: null
+  currentUserId: null
 };
 
 const sessionReducer = (state = initialState, action) => {
@@ -14,12 +14,12 @@ const sessionReducer = (state = initialState, action) => {
       return {
         ...state,
         isAuthenticated: !!action.currentUser,
-        currentUserID: action.currentUser.id
+        currentUserId: action.currentUser.id
       };
     case RECEIVE_USER_LOGOUT:
       return {
         isAuthenticated: false,
-        currentUserID: null
+        currentUserId: null
       };
     default:
       return state;
