@@ -5,7 +5,6 @@ import './session_form.css';
 import isEqual from 'lodash/isEqual';
 import '../header_nav/header_nav.css';
 
-
 class SessionForm extends React.Component {
   constructor(props) {
     super(props);
@@ -19,6 +18,7 @@ class SessionForm extends React.Component {
       errors: {}
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.submitRef = React.createRef();
   }
 
   componentDidMount() {
@@ -26,20 +26,27 @@ class SessionForm extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (!isEqual(prevProps.errors, this.props.errors) && Object.keys(this.props.errors).length > 0) {
+    if (!isEqual(prevProps.errors, this.props.errors) && Object.keys(this.props.errors).length > 0 && this._ismounted) {
       this.setState({errors: this.props.errors});
     }
   }
 
   componentWillUnmount() {
-    this.props.clearErrors();
     this._ismounted = false;
+    this.props.clearErrors();
   }
 
   handleSubmit(e) {
     e.preventDefault();
     this.setState({submitting: true}, 
-    () => this.props.processForm(this.state).then(() => this._ismounted && this.props.formType === 'login' ? this.setState({submitting: false, redBorder: true}) : this.setState({submitting: false})));
+    () => this.props.processForm(this.state).then(() => {
+      if (this._ismounted) {
+        this.submitRef.current.blur();
+        this.props.formType === 'login' ?
+        this.setState({ submitting: false, redBorder: true }) 
+        : this.setState({ submitting: false });
+      }
+    }));
   }
 
   update(field) {
@@ -97,7 +104,7 @@ class SessionForm extends React.Component {
         </header>
         {sessionError}
         <div className="session-form-container">
-          <form id={isSignup ? '' : 'login'} className="session-form" onSubmit={this.handleSubmit}>
+          <form id={isSignup ? null : 'login'} className="session-form" onSubmit={this.handleSubmit}>
             {header}
             {isSignup ? (
               <div className="session-form-name-container">
@@ -147,8 +154,10 @@ class SessionForm extends React.Component {
               /> : null}
             <input /* submit button */
               type="submit"
+              ref={this.submitRef}
               value={isSignup ? /* submit button message */
                 "Sign Up" : "Log In"}
+              id={this.state.submitting ? 'session-form-submit-button-submitting' : null}
               className="session-form-submit-button"
             />
             <div className="session-form-subtext-container"> {/* display other choice at bottom of form */}

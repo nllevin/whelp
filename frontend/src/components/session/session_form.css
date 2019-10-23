@@ -131,7 +131,7 @@ input.session-form-submit-button {
   background-color: #dc4f4f;
 }
 
-.session-form-submit-button:focus {
+#session-form-submit-button-submitting {
   color: white !important;
   opacity: 0.5;
 }
@@ -175,7 +175,7 @@ input.session-form-submit-button {
 .session-form-error-banner {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   border-radius: 3px;
   width: 960px;
   padding: 18px 18px 18px 24px;
@@ -191,6 +191,7 @@ input.session-form-submit-button {
 }
 
 .session-banner-clear-errors-button {
+  align-self: flex-start;
   font-size: 24px;
   color: #666;
   opacity: 0.5;
