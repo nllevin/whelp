@@ -16,10 +16,10 @@ const receiveBusinessAndReviews = data => ({
 
 export const fetchBusinesses = () => dispatch => (                              // will change for search/filters
   APIBusinessUtil.fetchBusinesses()
-    .then(businesses => dispatch(receiveBusinesses(businesses)))
+    .then(res => dispatch(receiveBusinesses(res.data)))
 );
 
 export const fetchBusinessAndReviews = businessId => dispatch => (
   APIBusinessUtil.fetchBusinessAndReviews(businessId)
-    .then(data => dispatch(receiveBusinessAndReviews(data)))
+    .then(res => dispatch(receiveBusinessAndReviews(res.data)))
 );
