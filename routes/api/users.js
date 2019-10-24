@@ -36,7 +36,7 @@ router.post('/signup', (req, res) => {
               .save()
               .then(user => {
                 const payload = {
-                  id: user._id,
+                  id: user.id,
                   firstName: user.firstName,
                   lastName: user.lastName,
                   email: user.email,
@@ -83,7 +83,7 @@ router.post('/login', (req, res) => {
         .then(isMatch => {
           if (isMatch) {
             const payload = {
-              id: user._id,
+              id: user.id,
               firstName: user.firstName,
               lastName: user.lastName,
               email: user.email,

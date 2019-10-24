@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
       });
       res.json(businesses);
     })
-    .catch(err => res.status(404).json({ nobusinessesfound: "No businesses found" }));
+    .catch(err => res.status(404).json({ nobusinessesfound: "No businesses found" })); // Is this right?
 });
 
 // business#show
@@ -40,3 +40,5 @@ router.get('/:id', (req, res) => {
     })
     .catch(err => res.status(404).json({ nobusinessfound: "No business found with that ID" }));
 });
+
+module.exports = router;
