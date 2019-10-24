@@ -39,7 +39,7 @@ const BusinessSchema = new Schema({
   }
 });
 
-BusinessSchema.index({name, address}, {unique: true});
+BusinessSchema.index({name: 1, address: 1}, {unique: true});
 
 const Business = mongoose.model('Business', BusinessSchema);
 module.exports = Business;
