@@ -3,11 +3,11 @@ const Schema = mongoose.Schema;
 
 const ReviewSchema = new Schema({
   authorId: {
-    type: ObjectId,
+    type: mongoose.Types.ObjectId,
     required: true
   },
   businessId: {
-    type: ObjectId,
+    type: mongoose.Types.ObjectId,
     required: true
   },
   businessName: {
