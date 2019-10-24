@@ -139,6 +139,7 @@ input.session-form-submit-button, button.session-form-submit-button {
 .session-form-subtext-container {
   display: flex;
   justify-content: flex-end;
+  margin-top: 12px;
 }
 
 .session-form-subheading > a {
