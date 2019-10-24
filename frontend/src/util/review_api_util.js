@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-export const createReview = data => (
-  axios.post('/api/reviews/', data)
+export const createReview = review => (
+  axios.post('/api/reviews/', review)
 );
 
-export const editReview = (reviewId, data) => (
-  axios.patch(`/api/reviews/${reviewId}`, data)
+export const editReview = (reviewId, review) => (
+  axios.patch(`/api/reviews/${reviewId}`, review)
 );
 
 export const deleteReview = reviewId => (

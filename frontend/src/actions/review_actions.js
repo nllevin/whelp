@@ -13,14 +13,14 @@ export const removeReview = reviewId => ({
   reviewId
 });
 
-export const createReview = data => dispatch => (
-  APIReviewUtil.createReview(data)
+export const createReview = review => dispatch => (
+  APIReviewUtil.createReview(review)
     .then(res => dispatch(receiveReview(res.data)))
     .catch(err => console.log(err))
 );
 
-export const editReview = (reviewId, data) => dispatch => (
-  APIReviewUtil.editReview(reviewId, data)
+export const editReview = (reviewId, review) => dispatch => (
+  APIReviewUtil.editReview(reviewId, review)
     .then(res => dispatch(receiveReview(res.data)))
     .catch(err => console.log(err))
 );
