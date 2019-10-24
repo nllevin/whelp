@@ -1,29 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const BusinessSchema = new Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  address: {
-    type: String,
-    required: true
-  },
-  phoneNumber: {
-    type: String,
-    required: true
-  },
-  schedules: [scheduleSchema],
-  priceRating: {
-    type: Number
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now
-  }
-});
-
 const ScheduleSchema = new Schema({
   day: {
     type: String,
@@ -38,6 +15,31 @@ const ScheduleSchema = new Schema({
     required: true
   }
 });
+
+const BusinessSchema = new Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  address: {
+    type: String,
+    required: true
+  },
+  phoneNumber: {
+    type: String,
+    required: true
+  },
+  schedules: [ScheduleSchema],
+  priceRating: {
+    type: Number
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+BusinessSchema.index({name, address}, {unique: true});
 
 const Business = mongoose.model('Business', BusinessSchema);
 module.exports = Business;
