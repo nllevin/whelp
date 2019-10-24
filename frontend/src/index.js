@@ -7,7 +7,7 @@ import { setAuthToken } from './util/session_api_util';
 import { logout } from './actions/session_actions';
 
 // FOR TESTING ONLY
-import { signup, login } from "./actions/session_actions";
+import { createReview, editReview, deleteReview } from "./actions/review_actions";
 /////////////////
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -37,9 +37,9 @@ document.addEventListener('DOMContentLoaded', () => {
   //FOR TESTING
   window.getState = store.getState;
   window.dispatch = store.dispatch;
-  window.signup = signup;
-  window.login = login;
-  window.logout = logout;
+  window.createReview = createReview;
+  window.editReview = editReview;
+  window.deleteReview = deleteReview;
   /////////////
 
   const root = document.getElementById("root");
