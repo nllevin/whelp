@@ -28,5 +28,9 @@ const ReviewSchema = new Schema({
   }
 });
 
+ReviewSchema.index({ authorId: 1 });
+ReviewSchema.index({ businessId: 1 });
+ReviewSchema.index({ authorId: 1, businessId: 1}, { unique: true });
+
 const Review = mongoose.model('Review', ReviewSchema);
 module.exports = Review;
