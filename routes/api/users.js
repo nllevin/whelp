@@ -71,7 +71,7 @@ router.post('/login', (req, res) => {
 
   const { email, password } = req.body;
   const loginError = "The email address or password you entered is incorrect.";
-
+  
   User.findOne({ email })
     .then(user => {
       if (!user) {

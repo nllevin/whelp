@@ -27,7 +27,7 @@
   margin: 45px 116.43px;
 }
 
-.session-form > input, .session-form-name-container > input {
+.session-form > input, .session-form-name-container > input, .session-form > button {
   font-size: 14px;
   padding: 5px 9px;
   border: 1px solid #999;
@@ -115,7 +115,7 @@ input.red-border {
   width: 147px;
 }
 
-input.session-form-submit-button {
+input.session-form-submit-button, button.session-form-submit-button {
   text-align: center;
   font-size: 16px;
   font-weight: bold;
@@ -139,6 +139,7 @@ input.session-form-submit-button {
 .session-form-subtext-container {
   display: flex;
   justify-content: flex-end;
+  margin-top: 12px;
 }
 
 .session-form-subheading > a {

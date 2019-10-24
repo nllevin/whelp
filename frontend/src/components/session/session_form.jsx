@@ -160,6 +160,11 @@ class SessionForm extends React.Component {
               id={this.state.submitting ? 'session-form-submit-button-submitting' : null}
               className="session-form-submit-button"
             />
+            <button /* demo login button */
+              onClick={e => {e.preventDefault(); this.props.demoLogin();}}
+              className="session-form-submit-button">
+              Demo Login
+            </button>
             <div className="session-form-subtext-container"> {/* display other choice at bottom of form */}
               <small className="session-form-subtle-text">
                 {isSignup ? "Already on Whelp?" : "New to Whelp?"}
