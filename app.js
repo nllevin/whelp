@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 const passport = require("passport");
 const path = require('path');
 
+const app = express();
+
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('frontend/build'));
   app.get('/', (req, res) => {
@@ -13,7 +15,6 @@ if (process.env.NODE_ENV === 'production') {
   })
 }
 
-const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static("frontend/src/public"));
