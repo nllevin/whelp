@@ -1,0 +1,45 @@
+.footer-container {
+  border-top: 1px solid #ccc;
+  min-width: 1020px;
+  background-color: rgb(245, 245, 245);
+}
+
+.footer-content {
+  width: 990px;
+  padding: 36px 15px 18px 15px;
+  margin: 0 auto;
+  font-size: 14px;
+  line-height: 1.29;
+}
+
+.footer-column {
+  margin-left: 30px;
+}
+
+.footer-column h3 {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.31;
+  color: #d32323;
+  margin-bottom: 12px;
+}
+
+.footer-column a {
+  cursor: pointer;
+  margin-bottom: 6px;
+  color: #0073bb;
+}
+
+.footer-column a:hover {
+  text-decoration: underline;
+}
+
+.footer-cityscape {
+  margin: 0 auto;
+  padding: 42px 0 18px;
+  background-image: url("../../public/footer_cityscape.png");
+  background-repeat: no-repeat;
+  background-size: 660px 140px;
+  background-position: center;
+  height: 140px;
+}
