@@ -1,0 +1,22 @@
+.business-index-content-container {
+  padding: 18px 30px;
+  margin: 0 auto;
+  width: 1020px;
+  display: flex;
+}
+
+.business-index-content {
+  width: 630px;
+  margin-right: 30px;
+}
+
+.business-index-content-container h2 {
+  padding: 6px 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.business-index-sidebar {
+  width: 300px;
+  border: 1px solid black;
+}

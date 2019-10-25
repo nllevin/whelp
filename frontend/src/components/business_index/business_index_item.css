@@ -1,0 +1,146 @@
+.business-index-item-container {
+  padding: 18px 0;
+  border-top: 1px solid #e6e6e6;
+  display: flex;
+}
+
+.business-index-item-container:first-of-type {
+  border-top: none;
+}
+
+.business-index-item-image-container {
+  height: 210px;
+  width: 210px;
+  overflow: hidden;
+  border-radius: 4px;
+  margin-right: 18px;
+  margin-bottom: 4px;
+  cursor: pointer;
+}
+
+.business-index-item-image-container img {
+  height: 210px;
+  width: auto;
+  margin-left: -50px;
+}
+
+.business-index-item-info {
+  width: 402px;
+}
+
+.business-index-item-info header {
+  display: flex;
+}
+
+.business-index-item-info main {
+  width: 62.5%;
+}
+
+.business-index-item-info main > p {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  text-align: left;
+}
+
+.business-index-item-info h3 > span {
+  white-space: pre;
+}
+
+.business-index-item-info a {
+  cursor: pointer;
+  color: #0073bb;
+  display: inline;
+}
+
+.business-index-item-info a:hover {
+  text-decoration: underline;
+}
+
+.business-index-item-reviews {
+  display: flex;
+  align-items: center;
+}
+
+[class^="half-stars-"] {
+  background-image: url("../../public//stars.png");
+  width: 102px;
+  height: 18px;
+  background-size: 132px 560px;
+  margin-top: 5px;
+  margin-right: 6px;
+  display: inline-block;
+}
+
+.half-stars-2 {
+  background-position-y: -258px;
+}
+
+.half-stars-3 {
+  background-position-y: calc(-258px - 18px);
+}
+
+.half-stars-4 {
+  background-position-y: calc(-258px - 2 * 18px);
+}
+
+.half-stars-5 {
+  background-position-y: calc(-258px - 3 * 18px);
+}
+
+.half-stars-6 {
+  background-position-y: calc(-258px - 4 * 18px);
+}
+
+.half-stars-7 {
+  background-position-y: calc(-258px - 5 * 18px);
+}
+
+.half-stars-8 {
+  background-position-y: calc(-258px - 6 * 18px);
+}
+
+.half-stars-9 {
+  background-position-y: calc(-258px - 7 * 18px);
+}
+
+.half-stars-10 {
+  background-position-y: calc(-258px - 8 * 18px);
+}
+
+.business-index-item-reviews span:last-of-type {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.29;
+  position: relative;
+  top: 1px;
+}
+
+.business-index-item-info main > span {
+  line-height: 21px;
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.business-index-item-info aside {
+  width: 37.5%;
+  padding-top: 4px;
+  padding-left: 12px;
+  text-align: right;
+}
+
+.business-index-item-info aside span {
+  margin-bottom: 6px;
+  color: #333;
+  text-align: right;
+  font-size: 14px;
+  line-height: 1.29;
+}
+
+.business-index-item-info > p {
+  margin: 12px 0;
+  font-size: 14px;
+  color: #333;
+  line-height: 1.38;
+  max-height: 54px;
+}
