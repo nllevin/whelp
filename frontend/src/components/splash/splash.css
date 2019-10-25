@@ -1,0 +1,111 @@
+.splash {
+  background-image: url("../../public/splash-whelps.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  height: 100vh;
+  width: 100%;
+}
+
+.splash-session-links {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 14px;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  padding-top: 30px;
+  margin-right: 59px;
+}
+
+.splash-session-links > a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 36px;
+  margin-right: 18px;
+}
+
+.splash-log-in-button {
+  box-sizing: border-box;
+  padding: 9px 12px 8px 12px;
+  margin-top: -2px;
+}
+
+.splash-log-in-button:hover {
+  border-bottom: 2px solid white;
+  padding-bottom: 6px;
+}
+
+.splash-log-in-button:active {
+  color: #999;
+}
+
+.splash-sign-up-button {
+  padding: 7px 24px 8px 24px;
+  border-radius: 4px;
+  border: 2px solid #fff;
+  margin-top: -2px;
+  transition: all .6s;
+}
+
+.splash-sign-up-button:hover {
+  background: #fff;
+  color: #666;
+}
+
+.splash-sign-up-button:active {
+  color: #999;
+}
+
+.splash-icon-container > .whelp-logo > span {
+  font-size: 50px;
+  margin-top: 10px;
+}
+
+.splash-y-icon {
+  background-image: url("../../public/y-icon.png");
+  height: 130px;
+  width: 55px;
+  background-size: 302px 130px;
+  background-position: 87px -27px;
+  cursor: pointer;
+}
+
+.splash-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 47%;
+}
+
+.splash-main > .search-bar-container {
+  height: 45px;
+  width: 960px;
+}
+
+.splash-main > .search-bar-container > .search-business-container {
+  height: 45px;
+  width: 480px;
+  font-size: 18px;
+}
+
+.splash-main > .search-bar-container > .search-location-container {
+  height: 45px;
+  width: 416px;
+  font-size: 18px;
+}
+
+.splash-main > .search-bar-container > .search-icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 45px;
+  width: 64px;
+}
+
+.splash-main > .search-bar-container > .search-icon-container > .search-icon {
+  text-align: center;
+  height: 20px;
+  width: 20px;
+}
