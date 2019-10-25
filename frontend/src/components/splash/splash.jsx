@@ -21,6 +21,10 @@ const Splash = () => (
         </div>
       </div>
       <SearchBar />
+      <footer className="splash-footer">
+        <span>Gold Coast, Australia</span>
+        <span>Photo by <a href="https://unsplash.com/@leio">Leio M.</a></span>
+      </footer>
     </div>
   </div>
 );
