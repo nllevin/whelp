@@ -9,36 +9,36 @@ router.get('/search', (req, res) => {
   Review
     .aggregate([ 
       { $match: { $text: { $search: query } } },
-      { $group: { _id: "$businessName", avgScore: { $avg: { $meta: "textScore" } } } },
+      { $group: { _id: "$businessId", avgScore: { $avg: { $meta: "textScore" } } } },
       { $sort: { avgScore: -1 } }
     ])
     .then(results => {
-      const resultNames = results.map(result => result._id);
-      const searchResultIds = [];
+      const resultIds = results.map(result => result._id.toHexString());
+      const searchResults = [];
       const businesses = {}
       const reviews = {};
       
       Business
-        .find( { name: { $in: resultNames } } )
+        .find( { _id: { $in: resultIds } } )
         .then(businessesArray => {
           Promise.all(businessesArray.map(business => {
             return (
               Review
                 .find( 
-                  { businessId: business._id, $text: { $search: query } },  
+                  { businessId: business.id, $text: { $search: query } },  
                   { score: { $meta: "textScore" } }
                 )
                 .sort( { score: { $meta: "textScore" } } )
                 .limit(1)
                 .then(result => {
                   const review = result[0];
-                  reviews[review._id] = review;
-                  businesses[business._id] = business;
+                  reviews[review.id] = review;
+                  businesses[business.id] = business;
 
-                  businessRank = resultNames.indexOf(business.name);
-                  searchResultIds[businessRank] = {
-                    businessId: business._id,
-                    reviewId: review._id
+                  businessSearchRank = resultIds.indexOf(business.id);
+                  searchResults[businessSearchRank] = {
+                    businessId: business.id,
+                    reviewId: review.id
                   };
                 })
             );
@@ -46,11 +46,14 @@ router.get('/search', (req, res) => {
             res.json({
               businesses,
               reviews,
-              searchResultIds
-            });
-          });
-        });
-    });
+              searchResults
+            })
+          })
+          .catch(err => console.log(err));
+        })
+        .catch(err => console.log(err));
+    })
+    .catch(err => console.log(err));
 });
 
 // business#show
