@@ -4,19 +4,53 @@ const Business = require('../../models/Business');
 const Review = require('../../models/Review');
 
 // business#index
-// will be changed later to incorporate search/filters
-// grabbing all businesses for now
-router.get('/', (req, res) => {
-  Business
-    .find()
-    .then(businessesArray => {
-      const businesses = {};
-      businessesArray.forEach(business => {
-        businesses[business.id] = business;
-      });
-      res.json(businesses);
-    })
-    .catch(err => res.status(404).json({ nobusinessesfound: "No businesses found" })); // Is this right?
+router.get('/search', (req, res) => {
+  const query = req.query['q'];
+  Review
+    .aggregate([ 
+      { $match: { $text: { $search: query } } },
+      { $group: { _id: "$businessName", avgScore: { $avg: { $meta: "textScore" } } } },
+      { $sort: { avgScore: -1 } }
+    ])
+    .then(results => {
+      const resultNames = results.map(result => result._id);
+      const searchResultIds = [];
+      const businesses = {}
+      const reviews = {};
+      
+      Business
+        .find( { name: { $in: resultNames } } )
+        .then(businessesArray => {
+          Promise.all(businessesArray.map(business => {
+            return (
+              Review
+                .find( 
+                  { businessId: business._id, $text: { $search: query } },  
+                  { score: { $meta: "textScore" } }
+                )
+                .sort( { score: { $meta: "textScore" } } )
+                .limit(1)
+                .then(result => {
+                  const review = result[0];
+                  reviews[review._id] = review;
+                  businesses[business._id] = business;
+
+                  businessRank = resultNames.indexOf(business.name);
+                  searchResultIds[businessRank] = {
+                    businessId: business._id,
+                    reviewId: review._id
+                  };
+                })
+            );
+          })).then(() => {
+            res.json({
+              businesses,
+              reviews,
+              searchResultIds
+            });
+          });
+        });
+    });
 });
 
 // business#show
