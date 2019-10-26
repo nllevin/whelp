@@ -20,3 +20,14 @@
   width: 300px;
   border: 1px solid black;
 }
+
+.business-index-content.no-search-results {
+  font-size: 14px;
+  line-height: 1.29;
+}
+
+.business-index-content.no-search-results h4 {
+  color: #333;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
