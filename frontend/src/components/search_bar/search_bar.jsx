@@ -1,10 +1,16 @@
 import React from 'react';
+import { withRouter, Redirect } from 'react-router-dom';
 import './search_bar.css';
 
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { business: "", location: "" }
+    this.state = { 
+      businessQuery: "", 
+      location: "" ,
+      isSearching: false
+    };
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   componentDidMount() {
@@ -21,19 +27,29 @@ class SearchBar extends React.Component {
     }
   }
 
+  handleSearch(e) {
+    e.preventDefault();
+    this.setState({ isSearching: true });
+  }
+
   update(field) {
     return e => this.setState({ [field]: e.target.value });
   }
 
   render() {
+    if (this.state.isSearching) {
+      return <Redirect to={`/businesses/search?q=${this.state.businessQuery}&loc=${this.state.location}`} />;
+    }
+
     return (
-      <div className="search-bar-container">
+      <form className="search-bar-container" onSubmit={this.handleSearch}>
         <div className="search-business-container">
           <span>Find</span>
           <input 
             type="text" 
             placeholder="grooming, Happy Dogs Hotel"
-            onChange={this.update("business")} 
+            value={this.state.businessQuery}
+            onChange={this.update("businessQuery")} 
           />
         </div>
         <div className="search-location-container">
@@ -44,12 +60,12 @@ class SearchBar extends React.Component {
             onChange={this.update("location")} 
           />
         </div>
-        <div className="search-icon-container">
+        <button className="search-icon-container">
           <i className="search-icon"></i>
-        </div>
-      </div>
+        </button>
+      </form>
     );
   }
 }
 
-export default SearchBar;
+export default withRouter(SearchBar);
