@@ -2,7 +2,10 @@ import {
   RECEIVE_REVIEW,
   REMOVE_REVIEW
 } from '../actions/review_actions';
-import { RECEIVE_BUSINESS_AND_REVIEWS } from '../actions/business_actions';
+import { 
+  RECEIVE_BUSINESSES_SEARCH,
+  RECEIVE_BUSINESS_AND_REVIEWS 
+} from '../actions/business_actions';
 
 const reviewsReducer = (state = {}, action) => {
   Object.freeze(state);
@@ -13,6 +16,8 @@ const reviewsReducer = (state = {}, action) => {
       let newState = Object.assign({}, state);
       delete newState[action.reviewId];
       return newState;
+    case RECEIVE_BUSINESSES_SEARCH:
+      return Object.assign({}, state, action.reviews);
     case RECEIVE_BUSINESS_AND_REVIEWS:
       return Object.assign({}, state, action.reviews);
     default:
