@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-export const fetchBusinesses = () => (                                          // will be changed for search/filters
-  axios.get('api/businesses')
+export const searchBusinesses = searchParams => (
+  axios.get(`api/businesses/search${searchParams}`)
 );
 
 export const fetchBusinessAndReviews = businessId => (

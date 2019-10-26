@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import HeaderNav from '../header_nav/header_nav';
 import BusinessIndexItem from './business_index_item';
 import './business_index.css';
@@ -6,7 +7,7 @@ import '../reset.css';
 
 class BusinessIndex extends React.Component {
   componentDidMount() {
-    this.props.fetchBusinesses();                                               // will change for search/filters
+    this.props.searchBusinesses(this.props.location.search);
   }
 
   render() {
@@ -40,4 +41,4 @@ class BusinessIndex extends React.Component {
   }
 }
 
-export default BusinessIndex;
+export default withRouter(BusinessIndex);
