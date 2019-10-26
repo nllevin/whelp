@@ -18,7 +18,7 @@ class BusinessIndex extends React.Component {
 
   render() {
     const { businesses } = this.props;
-    if (!businesses) return null;
+    if (businesses.length === 0) return null;
 
     return (
       <div className="business-index-container">
