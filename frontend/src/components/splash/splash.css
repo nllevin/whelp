@@ -7,6 +7,13 @@
   background-position-y: -575px;
 }
 
+.splash-nav {
+  display: flex;
+  justify-content: space-between;
+  width: 960px;
+  margin: 0 auto;
+}
+
 .splash-session-links {
   display: flex;
   justify-content: flex-end;
@@ -15,7 +22,6 @@
   font-weight: 700;
   cursor: pointer;
   padding-top: 30px;
-  margin-right: 59px;
 }
 
 .splash-session-links > a {
@@ -24,6 +30,10 @@
   align-items: center;
   height: 36px;
   margin-right: 18px;
+}
+
+.splash-session-links > a:last-of-type {
+  margin-right: 0px;
 }
 
 .splash-log-in-button {
