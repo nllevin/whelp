@@ -6,7 +6,6 @@ export const RECEIVE_BUSINESS_AND_REVIEWS = "RECEIVE_BUSINESS_AND_REVIEWS";
 const receiveBusinessesSearch = data => ({
   type: RECEIVE_BUSINESSES_SEARCH,
   businesses: data.businesses,
-  reviews: data.reviews,
   searchResults: data.searchResults
 });
 
