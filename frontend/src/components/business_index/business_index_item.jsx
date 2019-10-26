@@ -22,11 +22,7 @@ const BusinessIndexItem = ({ idx, business }) => (
           <span>{business.address}</span>
         </aside>
       </header>
-      <p>                 {/* need to fix text overflow with javascript */}
-        My son and I stopped in again. Yummy IPA!! Had the Braised Short Ribs and so delicious. Soft, fell off the bone!!
-        One of my patients suggested Legends and glad I listened
-        Always sit at the bar, watching a game
-      </p>
+      <p>{business.snippet}</p>
     </div>
   </li>
 );
