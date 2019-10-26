@@ -3,7 +3,7 @@ export const getUserById = (state, userId) => (
 );
 
 export const getBusinessesSearchResults = state => (
-  state.session.searchResultIds.map(ids => {
+  state.session.searchResults.map(ids => {
     const businessId = ids.businessId;
     return state.entities.businesses[businessId];
   })

@@ -8,7 +8,7 @@ import { RECEIVE_BUSINESSES_SEARCH } from '../actions/business_actions';
 const initialState = {
   isAuthenticated: false,
   currentUserId: null,
-  searchResultIds: []
+  searchResults: []
 };
 
 const sessionReducer = (state = initialState, action) => {
@@ -25,7 +25,7 @@ const sessionReducer = (state = initialState, action) => {
         currentUserId: null
       };
     case RECEIVE_BUSINESSES_SEARCH:
-      return Object.assign({}, initialState, { searchResultIds: action.searchResultIds });
+      return Object.assign({}, initialState, { searchResults: action.searchResults });
     default:
       return state;
   }

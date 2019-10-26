@@ -7,7 +7,7 @@ const receiveBusinessesSearch = data => ({
   type: RECEIVE_BUSINESSES_SEARCH,
   businesses: data.businesses,
   reviews: data.reviews,
-  searchResultIds: data.searchResultIds
+  searchResults: data.searchResults
 });
 
 const receiveBusinessAndReviews = data => ({
