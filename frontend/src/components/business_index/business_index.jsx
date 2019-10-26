@@ -10,6 +10,12 @@ class BusinessIndex extends React.Component {
     this.props.searchBusinesses(this.props.location.search);
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.location.search !== prevProps.location.search) {
+      this.props.searchBusinesses(this.props.location.search);
+    }
+  }
+
   render() {
     const { businesses } = this.props;
     if (!businesses) return null;

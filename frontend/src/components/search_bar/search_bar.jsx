@@ -7,8 +7,7 @@ class SearchBar extends React.Component {
     super(props);
     this.state = { 
       businessQuery: "", 
-      location: "" ,
-      isSearching: false
+      location: ""
     };
     this.handleSearch = this.handleSearch.bind(this);
   }
@@ -29,7 +28,7 @@ class SearchBar extends React.Component {
 
   handleSearch(e) {
     e.preventDefault();
-    this.setState({ isSearching: true });
+    this.props.history.push(`/businesses/search?q=${this.state.businessQuery}&loc=${this.state.location}`);
   }
 
   update(field) {
@@ -37,10 +36,6 @@ class SearchBar extends React.Component {
   }
 
   render() {
-    if (this.state.isSearching) {
-      return <Redirect to={`/businesses/search?q=${this.state.businessQuery}&loc=${this.state.location}`} />;
-    }
-
     return (
       <form className="search-bar-container" onSubmit={this.handleSearch}>
         <div className="search-business-container">
