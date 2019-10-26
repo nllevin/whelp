@@ -26,10 +26,10 @@ router.get('/search', (req, res) => {
             let snippet;
             if (queryWords.some(word => business.name.toLowerCase().includes(word))) {
               const snippetReviewWords = business.reviews[0].body.split(" ");
-              if (snippetReviewWords.length < 30) {
+              if (snippetReviewWords.length < 20) {
                 snippet = snippetReviewWords.join(" ");
               } else {
-                snippet = `${business.reviews[0].split(" ").slice(0, 30).join(" ")}...`;
+                snippet = `${business.reviews[0].split(" ").slice(0, 20).join(" ")}...`;
               }
             } else {
               const snippetReview = business.reviews.find(review => (
@@ -41,16 +41,16 @@ router.get('/search', (req, res) => {
               ));
               const snippetMidIdx = snippetReviewWords.indexOf(snippetTargetWord);
 
-              if (snippetMidIdx < 15) {
-                if (snippetReviewWords.length < 30) {
+              if (snippetMidIdx < 10) {
+                if (snippetReviewWords.length < 20) {
                   snippet = snippetReview;
                 } else {  
-                  snippet = `${snippetReview.split(" ").slice(0, 30).join(" ")}...`;
+                  snippet = `${snippetReview.split(" ").slice(0, 20).join(" ")}...`;
                 }
-              } else if (snippetReviewWords.length - snippetMidIdx < 15) {
-                snippet = `...${snippetReview.split(" ").slice(snippetMidIdx - 15, snippetReviewWords.length).join(" ")}`;
+              } else if (snippetReviewWords.length - snippetMidIdx < 10) {
+                snippet = `...${snippetReview.split(" ").slice(snippetMidIdx - 10, snippetReviewWords.length).join(" ")}`;
               } else {
-                snippet = `...${snippetReview.split(" ").slice(snippetMidIdx - 15, snippetMidIdx + 15).join(" ")}...`;
+                snippet = `...${snippetReview.split(" ").slice(snippetMidIdx - 10, snippetMidIdx + 10).join(" ")}...`;
               }
             }
             
