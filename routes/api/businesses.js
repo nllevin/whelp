@@ -13,43 +13,60 @@ router.get('/search', (req, res) => {
       { $sort: { avgScore: -1 } }
     ])
     .then(results => {
-      const resultIds = results.map(result => result._id.toHexString());
-      const searchResults = [];
+      const searchResults = results.map(result => result._id.toHexString());
       const businesses = {}
       const reviews = {};
-      
-      Business
-        .find( { _id: { $in: resultIds } } )
-        .then(businessesArray => {
-          Promise.all(businessesArray.map(business => {
-            return (
-              Review
-                .find( 
-                  { businessId: business.id, $text: { $search: query } },  
-                  { score: { $meta: "textScore" } }
-                )
-                .sort( { score: { $meta: "textScore" } } )
-                .limit(1)
-                .then(result => {
-                  const review = result[0];
-                  reviews[review.id] = review;
-                  businesses[business.id] = business;
+      const queryWords = query.toLowerCase().split(" ");
 
-                  businessSearchRank = resultIds.indexOf(business.id);
-                  searchResults[businessSearchRank] = {
-                    businessId: business.id,
-                    reviewId: review.id
-                  };
-                })
-            );
-          })).then(() => {
-            res.json({
-              businesses,
-              reviews,
-              searchResults
-            })
-          })
-          .catch(err => console.log(err));
+      Business
+        .find( { _id: { $in: searchResults } } )
+        .populate("reviews")
+        .then(businessesArray => {
+          businessesArray.forEach(business => {
+            let snippet;
+            if (queryWords.some(word => business.name.toLowerCase().includes(word))) {
+              const snippetReviewWords = business.reviews[0].body.split(" ");
+              if (snippetReviewWords.length < 30) {
+                snippet = snippetReviewWords.join(" ");
+              } else {
+                snippet = `${business.reviews[0].split(" ").slice(0, 30).join(" ")}...`;
+              }
+            } else {
+              const snippetReview = business.reviews.find(review => (
+                queryWords.some(word => (review.body.toLowerCase().includes(word)))
+              )).body;
+              const snippetReviewWords = snippetReview.toLowerCase().split(" ");
+              const snippetTargetWord = snippetReviewWords.find(word => (
+                queryWords.includes(word)
+              ));
+              const snippetMidIdx = snippetReviewWords.indexOf(snippetTargetWord);
+
+              if (snippetMidIdx < 15) {
+                if (snippetReviewWords.length < 30) {
+                  snippet = snippetReview;
+                } else {  
+                  snippet = `${snippetReview.split(" ").slice(0, 30).join(" ")}...`;
+                }
+              } else if (snippetReviewWords.length - snippetMidIdx < 15) {
+                snippet = `...${snippetReview.split(" ").slice(snippetMidIdx - 15, snippetReviewWords.length).join(" ")}`;
+              } else {
+                snippet = `...${snippetReview.split(" ").slice(snippetMidIdx - 15, snippetMidIdx + 15).join(" ")}...`;
+              }
+            }
+            
+            businesses[business.id] = {
+              name: business.name,
+              address: business.address,
+              phoneNumber: business.phoneNumber,
+              schedules: business.schedules,
+              priceRating: business.priceRating,
+              snippet
+            };
+          });
+          res.json({
+            businesses,
+            searchResults
+          });
         })
         .catch(err => console.log(err));
     })
