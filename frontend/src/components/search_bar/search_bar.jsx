@@ -38,7 +38,7 @@ class SearchBar extends React.Component {
   render() {
     return (
       <form className="search-bar-container" onSubmit={this.handleSearch}>
-        <div className="search-business-container">
+        <label className="search-business-container">
           <span>Find</span>
           <input 
             type="text" 
@@ -46,15 +46,15 @@ class SearchBar extends React.Component {
             value={this.state.businessQuery}
             onChange={this.update("businessQuery")} 
           />
-        </div>
-        <div className="search-location-container">
+        </label>
+        <label className="search-location-container">
           <span>Near</span>
           <input 
             type="text" 
             value={this.state.location}
             onChange={this.update("location")} 
           />
-        </div>
+        </label>
         <button className="search-icon-container">
           <i className="search-icon"></i>
         </button>
