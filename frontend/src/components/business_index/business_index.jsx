@@ -6,8 +6,13 @@ import './business_index.css';
 import '../reset.css';
 
 class BusinessIndex extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { isMounting: true };
+  }
   componentDidMount() {
     this.props.searchBusinesses(this.props.location.search);
+    this.setState({ isMounting: false });
   }
 
   componentDidUpdate(prevProps) {
@@ -17,6 +22,8 @@ class BusinessIndex extends React.Component {
   }
 
   render() {
+    if (this.state.isMounting) return null;
+
     const { businesses } = this.props;
     const noResultsDisplay = (
         <div className="business-index-content no-search-results">
