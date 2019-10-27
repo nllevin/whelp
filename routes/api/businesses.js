@@ -4,19 +4,73 @@ const Business = require('../../models/Business');
 const Review = require('../../models/Review');
 
 // business#index
-// will be changed later to incorporate search/filters
-// grabbing all businesses for now
-router.get('/', (req, res) => {
-  Business
-    .find()
-    .then(businessesArray => {
-      const businesses = {};
-      businessesArray.forEach(business => {
-        businesses[business.id] = business;
-      });
-      res.json(businesses);
+router.get('/search', (req, res) => {
+  const query = req.query['q'];
+  Review
+    .aggregate([ 
+      { $match: { $text: { $search: query } } },
+      { $group: { _id: "$businessId", avgScore: { $avg: { $meta: "textScore" } } } },
+      { $sort: { avgScore: -1 } }
+    ])
+    .then(results => {
+      const searchResults = results.map(result => result._id.toHexString());
+      const businesses = {}
+      const reviews = {};
+      const queryWords = query.toLowerCase().split(" ");
+
+      Business
+        .find( { _id: { $in: searchResults } } )
+        .populate("reviews")
+        .then(businessesArray => {
+          businessesArray.forEach(business => {
+            let snippet;
+            if (queryWords.some(word => business.name.toLowerCase().includes(word))) {
+              const snippetReviewWords = business.reviews[0].body.split(" ");
+              if (snippetReviewWords.length < 20) {
+                snippet = snippetReviewWords.join(" ");
+              } else {
+                snippet = `${business.reviews[0].split(" ").slice(0, 20).join(" ")}...`;
+              }
+            } else {
+              const snippetReview = business.reviews.find(review => (
+                queryWords.some(word => (review.body.toLowerCase().includes(word)))
+              )).body;
+              const snippetReviewWords = snippetReview.toLowerCase().split(" ");
+              const snippetTargetWord = snippetReviewWords.find(word => (
+                queryWords.includes(word)
+              ));
+              const snippetMidIdx = snippetReviewWords.indexOf(snippetTargetWord);
+
+              if (snippetMidIdx < 10) {
+                if (snippetReviewWords.length < 20) {
+                  snippet = snippetReview;
+                } else {  
+                  snippet = `${snippetReview.split(" ").slice(0, 20).join(" ")}...`;
+                }
+              } else if (snippetReviewWords.length - snippetMidIdx < 10) {
+                snippet = `...${snippetReview.split(" ").slice(snippetMidIdx - 10, snippetReviewWords.length).join(" ")}`;
+              } else {
+                snippet = `...${snippetReview.split(" ").slice(snippetMidIdx - 10, snippetMidIdx + 10).join(" ")}...`;
+              }
+            }
+            
+            businesses[business.id] = {
+              name: business.name,
+              address: business.address,
+              phoneNumber: business.phoneNumber,
+              schedules: business.schedules,
+              priceRating: business.priceRating,
+              snippet
+            };
+          });
+          res.json({
+            businesses,
+            searchResults
+          });
+        })
+        .catch(err => console.log(err));
     })
-    .catch(err => res.status(404).json({ nobusinessesfound: "No businesses found" })); // Is this right?
+    .catch(err => console.log(err));
 });
 
 // business#show

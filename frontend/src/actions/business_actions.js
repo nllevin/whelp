@@ -1,11 +1,12 @@
 import * as APIBusinessUtil from '../util/business_api_util';
 
-export const RECEIVE_BUSINESSES = "RECEIVE_BUSINESSES";
+export const RECEIVE_BUSINESSES_SEARCH = "RECEIVE_BUSINESSES";
 export const RECEIVE_BUSINESS_AND_REVIEWS = "RECEIVE_BUSINESS_AND_REVIEWS";
 
-const receiveBusinesses = businesses => ({
-  type: RECEIVE_BUSINESSES,
-  businesses
+const receiveBusinessesSearch = data => ({
+  type: RECEIVE_BUSINESSES_SEARCH,
+  businesses: data.businesses,
+  searchResults: data.searchResults
 });
 
 const receiveBusinessAndReviews = data => ({
@@ -14,9 +15,9 @@ const receiveBusinessAndReviews = data => ({
   reviews: data.reviews
 });
 
-export const fetchBusinesses = () => dispatch => (                              // will change for search/filters
-  APIBusinessUtil.fetchBusinesses()
-    .then(res => dispatch(receiveBusinesses(res.data)))
+export const searchBusinesses = searchParams => dispatch => (
+  APIBusinessUtil.searchBusinesses(searchParams)
+    .then(res => dispatch(receiveBusinessesSearch(res.data)))
 );
 
 export const fetchBusinessAndReviews = businessId => dispatch => (
