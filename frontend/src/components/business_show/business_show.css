@@ -215,12 +215,12 @@
   line-height: 1.5em;
   height: 30px;
   width: 30px;
+  color: #999;
 }
 
 .current-user-review-delete-icon {
   height: 18px;
   width: 18px;
-  color: #999;
   font-size: 14px;
   font-weight: bold;
 }
@@ -239,15 +239,13 @@
   margin-right: 5px;
 }
 
-.current-user-review-edit-link:hover, .current-user-review-delete-icon:hover {
-  color: #333;
-}
-
 .current-user-review-delete-button:hover, .current-user-review-edit-link:hover {
   cursor: pointer;
+  color: #333;
   background: linear-gradient(#fff,#eee);
 }
 
 .current-user-review-delete-button:active, .current-user-review-edit-link:active {
+  color: #333;
   background: linear-gradient(#f0f0f0,#fff);
 }
