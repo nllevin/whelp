@@ -33,7 +33,10 @@ class BusinessIndex extends React.Component {
           <p>Try a more general search, e.g. "pizza" instead of "pepperoni".</p>
         </div>
     );
-
+    
+    const queryWords = 
+      (new URLSearchParams(this.props.location.search))
+      .get("q").toLowerCase().split(" ");
     const resultsDisplay = (
       <main className="business-index-content">
         <h2>All Results</h2>
@@ -44,6 +47,7 @@ class BusinessIndex extends React.Component {
                 key={business._id}
                 idx={idx}
                 business={business}
+                queryWords={queryWords}
               />
             ))
           }
