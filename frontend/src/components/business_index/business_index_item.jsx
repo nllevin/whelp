@@ -25,8 +25,8 @@ const BusinessIndexItem = ({ idx, business, queryWords }) => {
         </header>
         <p>
           {
-            business.snippet.split(" ").map(word => (
-              queryWords.includes(word.toLowerCase()) ? <b>{word} </b> : `${word} `
+            business.snippet.split(" ").map((word, idx) => (
+              queryWords.includes(word.toLowerCase()) ? <b key={idx}>{word} </b> : `${word} `
             ))
           }
         </p>

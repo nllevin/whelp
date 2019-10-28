@@ -11,8 +11,8 @@ class BusinessIndex extends React.Component {
     this.state = { isMounting: true };
   }
   componentDidMount() {
-    this.props.searchBusinesses(this.props.location.search);
-    this.setState({ isMounting: false });
+    this.props.searchBusinesses(this.props.location.search)
+      .then(() => this.setState({ isMounting: false }));
   }
 
   componentDidUpdate(prevProps) {
