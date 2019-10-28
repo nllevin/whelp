@@ -4,6 +4,6 @@ export const fetchBusinesses = () => (                                          
   axios.get('api/businesses')
 );
 
-export const fetchBusinessAndReviews = businessId => (
+export const fetchBusinessAndReviewsWithAuthors = businessId => (
   axios.get(`api/businesses/${businessId}`)
 );

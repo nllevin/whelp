@@ -1,0 +1,69 @@
+.review-index-item {
+  padding: 18px 0;
+  font-size: 14px;
+  border-top: 1px solid #e6e6e6;
+}
+
+.review-index-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.review-index-item-author {
+  width: 222px;
+}
+
+.review-index-item-content {
+  width: 371px;
+}
+
+.review-index-item-rating-and-date {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+[class^="half-stars-"] {
+  background-image: url("../../public//stars.png");
+  width: 102px;
+  height: 18px;
+  background-size: 132px 560px;
+  margin-right: 6px;
+  display: inline-block;
+}
+
+.half-stars-2 {
+  background-position-y: -258px;
+}
+
+.half-stars-3 {
+  background-position-y: calc(-258px - 18px);
+}
+
+.half-stars-4 {
+  background-position-y: calc(-258px - 2 * 18px);
+}
+
+.half-stars-5 {
+  background-position-y: calc(-258px - 3 * 18px);
+}
+
+.half-stars-6 {
+  background-position-y: calc(-258px - 4 * 18px);
+}
+
+.half-stars-7 {
+  background-position-y: calc(-258px - 5 * 18px);
+}
+
+.half-stars-8 {
+  background-position-y: calc(-258px - 6 * 18px);
+}
+
+.half-stars-9 {
+  background-position-y: calc(-258px - 7 * 18px);
+}
+
+.half-stars-10 {
+  background-position-y: calc(-258px - 8 * 18px);
+}
