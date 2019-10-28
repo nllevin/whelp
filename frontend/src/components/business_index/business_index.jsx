@@ -63,7 +63,6 @@ class BusinessIndex extends React.Component {
         <div className="business-index-content-container">
           {businesses.length === 0 ? noResultsDisplay : resultsDisplay}
           <aside className="business-index-sidebar">
-
             <SearchMap 
               businesses={businesses}
               lat={searchParams.get("lat")}

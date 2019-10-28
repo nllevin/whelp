@@ -103,7 +103,15 @@ class SearchMap extends React.Component {
     if (this.state.isLoadingScript) return null;
 
     return (
-      <div className="search-map-container" ref={map => this.mapNode = map}>
+      <div className="search-map-container">
+        <header>
+          <h3>Search Map</h3>
+          <label>
+            <input type="checkbox"/>
+            Redo search when map is moved
+          </label>
+        </header>
+        <div className="search-map" ref={map => this.mapNode = map}></div>
       </div>
     );
   }
