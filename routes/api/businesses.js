@@ -32,6 +32,8 @@ router.get('/search', (req, res) => {
               _id: business.id,
               name: business.name,
               address: business.address,
+              lat: business.lat,
+              lng: business.lng,
               phoneNumber: business.phoneNumber,
               schedules: business.schedules,
               priceRating: business.priceRating,

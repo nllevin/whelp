@@ -26,7 +26,7 @@ class BusinessIndex extends React.Component {
   render() {
     if (this.state.isMounting) return null;
 
-    const { businesses } = this.props;
+    const { businesses, history } = this.props;
     const searchParams = new URLSearchParams(this.props.location.search);
     const queryWords = searchParams.get("q").toLowerCase().split(" ");
 
@@ -63,9 +63,12 @@ class BusinessIndex extends React.Component {
         <div className="business-index-content-container">
           {businesses.length === 0 ? noResultsDisplay : resultsDisplay}
           <aside className="business-index-sidebar">
+
             <SearchMap 
+              businesses={businesses}
               lat={searchParams.get("lat")}
               lng={searchParams.get("lng")}
+              history={history}
             />
           </aside>
         </div>
