@@ -33,6 +33,7 @@ const BusinessSchema = new Schema({
   priceRating: {
     type: Number
   },
+  imageUrl: { type: String },
   createdAt: {
     type: Date,
     default: Date.now
