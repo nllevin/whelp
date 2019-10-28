@@ -64,6 +64,8 @@ const seed = async function() {
     const newBusiness = new Business({
       name: faker.company.companyName(),
       address: `${addressData[2]} ${addressData[3]}, New York, New York ${addressData[addressData.length - 3]}`,
+      lat: addressData[1],
+      lng: addressData[0],
       phoneNumber: faker.phone.phoneNumber(),
       schedules: [
         { day: "Sunday", startTime: "9:00", endTime: "17:00" },

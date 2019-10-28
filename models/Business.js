@@ -25,6 +25,14 @@ const BusinessSchema = new Schema({
     type: String,
     required: true
   },
+  lat: {
+    type: Number,
+    required: true
+  },
+  lng: {
+    type: Number,
+    required: true
+  },
   phoneNumber: {
     type: String,
     required: true
