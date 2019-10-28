@@ -20,7 +20,7 @@ const BusinessIndexItem = ({ idx, business, queryWords }) => {
           </main>
           <aside>
             <span>{business.phoneNumber}</span>
-            <span>{business.address}</span>
+            <span>{business.address.split(",")[0]}</span>
           </aside>
         </header>
         <p>
