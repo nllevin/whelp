@@ -41,6 +41,7 @@ router.post('/signup', (req, res) => {
                   lastName: user.lastName,
                   email: user.email,
                   zipCode: user.zipCode,
+                  avatarUrl: user.avatarUrl,
                   createdAt: user.createdAt
                 }; //favorites, etc.. add more later
 
@@ -88,6 +89,7 @@ router.post('/login', (req, res) => {
               lastName: user.lastName,
               email: user.email,
               zipCode: user.zipCode,
+              avatarUrl: user.avatarUrl,
               createdAt: user.createdAt
             }; //favorites, etc.. add more later
 

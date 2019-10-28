@@ -27,6 +27,7 @@ const seed = async function() {
     lastName: "Mowgli",
     email: "kitty@aol.com",
     zipCode: "94016",
+    avatarUrl: `${faker.image.cats()}/3`,
     password: "hunter2"
   });
   demoUser.password = bcrypt.hashSync(demoUser.password, bcrypt.genSaltSync(10));
@@ -39,6 +40,7 @@ const seed = async function() {
       lastName: faker.name.lastName(),
       email: faker.internet.email(),
       zipCode: faker.address.zipCode(),
+      avatarUrl: faker.image.avatar(),
       password: "password"
     });
     newUser.password = bcrypt.hashSync(newUser.password, bcrypt.genSaltSync(10));
@@ -60,7 +62,8 @@ const seed = async function() {
         { day: "Friday", startTime: "9:00", endTime: "17:00" },
         { day: "Saturday", startTime: "9:00", endTime: "17:00" },
       ],
-      priceRating: Math.floor(Math.random() * 4 + 1)
+      priceRating: Math.floor(Math.random() * 4 + 1),
+      imageUrl: `${faker.image.city()}/${Math.floor(Math.random() * 5 + 1)}`
     });
     businesses.push(newBusiness);
   }

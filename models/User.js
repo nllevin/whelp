@@ -23,6 +23,7 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
+  avatarUrl: { type: String },
   createdAt: {
     type: Date,
     default: Date.now
