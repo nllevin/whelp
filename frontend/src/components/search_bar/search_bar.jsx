@@ -7,7 +7,8 @@ class SearchBar extends React.Component {
     super(props);
     this.state = { 
       businessQuery: "", 
-      location: ""
+      lat: "",
+      lng: ""
     };
     this.handleSearch = this.handleSearch.bind(this);
   }
@@ -16,19 +17,22 @@ class SearchBar extends React.Component {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         this.setState({
-          location: `Latitude: ${position.coords.latitude}, Longitude: ${position.coords.longitude}`              // use Geocoding API here
+          lat: position.coords.latitude, 
+          lng: position.coords.longitude              // use Geocoding API here
         });
       });
     } else {
       this.setState({
-        location: "San Francisco, CA"
+        lat: 40.7128,
+        lng: -74.0060
       });
     }
   }
 
   handleSearch(e) {
     e.preventDefault();
-    this.props.history.push(`/businesses/search?q=${this.state.businessQuery}&loc=${this.state.location}`);
+    const { businessQuery, lat, lng } = this.state;
+    this.props.history.push(`/businesses/search?q=${businessQuery}&lat=${lat}&lng=${lng}`);
   }
 
   update(field) {
@@ -36,6 +40,7 @@ class SearchBar extends React.Component {
   }
 
   render() {
+    const { businessQuery, lat, lng } = this.state;
     return (
       <form className="search-bar-container" onSubmit={this.handleSearch}>
         <label className="search-business-container">
@@ -43,7 +48,7 @@ class SearchBar extends React.Component {
           <input 
             type="text" 
             placeholder="grooming, Happy Dogs Hotel"
-            value={this.state.businessQuery}
+            value={businessQuery}
             onChange={this.update("businessQuery")} 
           />
         </label>
@@ -51,7 +56,7 @@ class SearchBar extends React.Component {
           <span>Near</span>
           <input 
             type="text" 
-            value={this.state.location}
+            value={`Lat: ${lat}, long: ${lng}`}
             onChange={this.update("location")} 
           />
         </label>

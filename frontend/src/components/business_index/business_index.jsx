@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import HeaderNav from '../header_nav/header_nav';
 import BusinessIndexItem from './business_index_item';
+import SearchMap from './search_map';
 import './business_index.css';
 import '../reset.css';
 
@@ -10,6 +11,7 @@ class BusinessIndex extends React.Component {
     super(props);
     this.state = { isMounting: true };
   }
+
   componentDidMount() {
     this.props.searchBusinesses(this.props.location.search)
       .then(() => this.setState({ isMounting: false }));
@@ -25,6 +27,9 @@ class BusinessIndex extends React.Component {
     if (this.state.isMounting) return null;
 
     const { businesses } = this.props;
+    const searchParams = new URLSearchParams(this.props.location.search);
+    const queryWords = searchParams.get("q").toLowerCase().split(" ");
+
     const noResultsDisplay = (
         <div className="business-index-content no-search-results">
           <h4>Suggestions for improving the results:</h4>
@@ -34,9 +39,6 @@ class BusinessIndex extends React.Component {
         </div>
     );
     
-    const queryWords = 
-      (new URLSearchParams(this.props.location.search))
-      .get("q").toLowerCase().split(" ");
     const resultsDisplay = (
       <main className="business-index-content">
         <h2>All Results</h2>
@@ -61,7 +63,10 @@ class BusinessIndex extends React.Component {
         <div className="business-index-content-container">
           {businesses.length === 0 ? noResultsDisplay : resultsDisplay}
           <aside className="business-index-sidebar">
-            <span>map and ads go here</span>
+            <SearchMap 
+              lat={searchParams.get("lat")}
+              lng={searchParams.get("lng")}
+            />
           </aside>
         </div>
       </div>
