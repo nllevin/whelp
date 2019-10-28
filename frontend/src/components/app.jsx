@@ -13,8 +13,8 @@ const App = () => (
     <Switch>
       <AuthRoute path='/login' component={LoginForm} />
       <AuthRoute path='/signup' component={SignupForm} />
-      <Route path='/splash' component={Splash} />
       <Route path='/businesses/search' component={BusinessIndexContainer} />
+      <Route path='/' component={Splash} />
     </Switch>
     <Footer />
   </div>
