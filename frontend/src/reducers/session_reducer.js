@@ -25,7 +25,9 @@ const sessionReducer = (state = initialState, action) => {
         currentUserId: null
       };
     case RECEIVE_BUSINESSES_SEARCH:
-      return Object.assign({}, state, { searchResults: action.searchResults });
+      const newState = Object.assign({}, state);
+      newState.searchResults = action.searchResults;
+      return newState;
     default:
       return state;
   }
