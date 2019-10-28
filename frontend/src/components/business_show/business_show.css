@@ -20,10 +20,13 @@
 }
 
 .business-show-sidebar-list {
+  position: sticky;
+  top: 18px;
   width: 319px;
   padding: 6px;
   border: 1px solid #e6e6e6;
   border-radius: 4px;
+  z-index: -1;
 }
 
 .business-show-sidebar-list > li {
@@ -125,4 +128,126 @@
   color: #41a700;
   font-weight: 700;
   font-size: 12px;
+}
+
+.business-show-review-form-starter {
+  display: flex;
+  justify-content: space-between;
+  padding: 18px 0;
+}
+
+.review-form-currentUser {
+  display: flex;
+  width: 222px;
+}
+
+.review-form-empty-profile {
+  background-image: url("../../public/empty_profile.png");
+  background-size: 148px;
+  height: 68px;
+  width: 148px;
+}
+
+.review-form-currentUser-avatar {
+  background-image: url("../../public/default_avatar.png");
+  height: 60px;
+  width: 60px;
+  border-radius: 4px;
+}
+
+.review-form-currentUser-details {
+  margin-left: 6px;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1.28571em;
+}
+
+.review-form-item-currentUser-name {
+  font-size: 14px;
+}
+
+.review-form-currentUser-zipcode {
+  line-height: 1.5em;
+}
+
+.review-form-creator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 111px;
+  width: 356px;
+  padding: 12px;
+  background-color: #f5f5f5;
+  border: 1px solid #e6e6e6;
+  border-radius: 4px;
+  margin-right: 30px;
+}
+
+.review-creator-link {
+  display: flex;
+  color: #0073bb;
+  font-size: 14px;
+  border-top: 1px solid #e6e6e6;
+  padding-top: 12px;
+  cursor: pointer;
+}
+
+.review-creator-link > strong {
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.review-creator-link:hover {
+  text-decoration: underline;
+}
+
+.current-user-review-options {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
+.current-user-review-delete-button {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 12px;
+  line-height: 1.5em;
+  height: 30px;
+  width: 30px;
+}
+
+.current-user-review-delete-icon {
+  height: 18px;
+  width: 18px;
+  color: #999;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.current-user-review-edit-link {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 12px;
+  color: #999;
+  line-height: 1.5em;
+  margin-right: 10px;
+}
+
+.current-user-edit-icon {
+  margin-right: 5px;
+}
+
+.current-user-review-edit-link:hover, .current-user-review-delete-icon:hover {
+  color: #333;
+}
+
+.current-user-review-delete-button:hover, .current-user-review-edit-link:hover {
+  cursor: pointer;
+  background: linear-gradient(#fff,#eee);
+}
+
+.current-user-review-delete-button:active, .current-user-review-edit-link:active {
+  background: linear-gradient(#f0f0f0,#fff);
 }

@@ -8,6 +8,11 @@ const ReviewItem = ({ review, author }) => (
       <div className="review-index-author-details">
         <span className="review-index-item-author-name">{author.firstName} {author.lastName}</span>
         <span className="review-index-author-zipcode">{author.zipCode}</span>
+        {/* add later after figuring out how to get total review count of user
+        <div className="review-index-author-review-count">
+          <i className="fas fa-star"></i>
+          <span><strong></strong></span>
+        </div> */}
       </div>
     </div>
     <div className="review-index-item-content">

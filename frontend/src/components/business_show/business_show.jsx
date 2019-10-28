@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import '../reset.css';
 import './business_show.css';
 import './business_rating.css';
+import '../review_index/review_index.css';
 
 class BusinessShow extends React.Component {
   componentDidMount() {
@@ -18,7 +19,7 @@ class BusinessShow extends React.Component {
   }
 
   render() {
-    const { business } = this.props;
+    const { business, currentUser, currentUserReview } = this.props;
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const today = new Date();
     const currentDay = days[today.getDay()];
@@ -66,7 +67,50 @@ class BusinessShow extends React.Component {
             </div>
             <div className="business-show-reviews-container">
               <div className="business-show-review-form-starter">
-                <Link to={`/businesses/${business._id}/review`}>Start your review of<strong>{business.name}</strong></Link>
+                {Object.keys(currentUser).length > 0 ?
+                <div className="review-form-currentUser">
+                  <img className="review-form-currentUser-avatar" src={currentUser.avatarUrl} alt=""></img>
+                  <div className="review-form-currentUser-details">
+                    <span className="review-form-item-currentUser-name">{currentUser.firstName || ""} {currentUser.lastName || ""}</span>
+                    <span className="review-form-currentUser-zipcode">{currentUser.zipCode || ""}</span>
+                    {/* add review count later */}
+                  </div>
+                </div>
+                : <i className="review-form-empty-profile"></i>}
+                {Object.keys(currentUser).length > 0 ?
+                  (Object.keys(currentUserReview).length === 0 ?
+                  <div className="review-form-creator">
+                    <div className="review-form-star-rating">
+                      <span className="one-star"></span>
+                      <span className="two-stars"></span>
+                      <span className="three-stars"></span>
+                      <span className="four-stars"></span>
+                      <span className="five-stars"></span>
+                    </div>
+                    <Link 
+                      className="review-creator-link" 
+                      to={`/businesses/${business._id}/review`}>
+                      Start your review of<strong>{business.name}</strong>.
+                    </Link>
+                  </div>
+                    : <div className="review-index-item-content">
+                        <div className="review-index-item-rating-and-date">
+                          <span className={`half-stars-${(
+                            Math.round((currentUserReview.rating) * 2))}`}></span>
+                          <span>{currentUserReview.createdAt.slice(0, 10)}</span>
+                        </div>
+                        <p className="review-index-item-body">{currentUserReview.body}</p>
+                        <div className="current-user-review-options">
+                        <Link className="current-user-review-edit-link" to={`/businesses/${business._id}/review/edit`}><i className="fas fa-pencil-alt current-user-edit-icon"></i>Edit Review</Link>
+                          <button className="current-user-review-delete-button"
+                            onClick={() => this.props.deleteReview(currentUserReview._id)}>
+                            <i className="far fa-trash-alt current-user-review-delete-icon"></i>
+                          </button>
+                        </div>
+                      </div>)
+                  : <div className="review-form-creator">
+                      <Link className="review-creator-link" to="/login">Log in to write a review</Link>
+                    </div>}
               </div>
               <ReviewIndex />
             </div>

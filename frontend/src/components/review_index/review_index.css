@@ -9,6 +9,10 @@
   justify-content: space-between;
 }
 
+.review-index-item-body {
+  font-size: 14px;
+}
+
 .review-index-item-author {
   display: flex;
   width: 222px;

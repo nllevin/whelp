@@ -6,14 +6,16 @@ import LoginForm from './session/login_container';
 import SignupForm from './session/signup_container';
 import Splash from './splash/splash';
 import BusinessShow from './business_show/business_show_container';
-import ReviewForm  from './review_form/review_form_container';
+import CreateReviewForm  from './review_form/create_review_form_container';
+import EditReviewForm from './review_form/edit_review_form_container';
 
 const App = () => (
   <Switch>
     <AuthRoute path='/login' component={LoginForm} />
     <AuthRoute path='/signup' component={SignupForm} />
     <Route path='/splash' component={Splash} />
-    <Route path='/businesses/:businessId/review' component={ReviewForm} />
+    <ProtectedRoute path='/businesses/:businessId/review/edit' component={EditReviewForm} />
+    <ProtectedRoute path='/businesses/:businessId/review' component={CreateReviewForm} />
     <Route path='/businesses/:businessId' component={BusinessShow} />
   </Switch>
 );
