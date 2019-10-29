@@ -153,6 +153,31 @@ class BusinessShow extends React.Component {
                         </div>
                       </div>)
                   : <div className="review-form-creator">
+                      <span
+                        onMouseOut={this.resetRatingToSelected}
+                        className={`review-form-half-stars-${(
+                          Math.round((this.state.rating) * 2))}`}>
+                        <div
+                          onClick={() => this.props.history.push(`/login`)}
+                          onMouseOver={this.hoverRating(1)}
+                          className="review-form-star-select-option"></div>
+                        <div
+                          onClick={() => this.props.history.push(`/login`)}
+                          onMouseOver={this.hoverRating(2)}
+                          className="review-form-star-select-option"></div>
+                        <div
+                          onClick={() => this.props.history.push(`/login`)}
+                          onMouseOver={this.hoverRating(3)}
+                          className="review-form-star-select-option"></div>
+                        <div
+                          onClick={() => this.props.history.push(`/login`)}
+                          onMouseOver={this.hoverRating(4)}
+                          className="review-form-star-select-option"></div>
+                        <div
+                          onClick={() => this.props.history.push(`/login`)}
+                          onMouseOver={this.hoverRating(5)}
+                          className="review-form-star-select-option"></div>
+                      </span>
                       <Link className="review-creator-link" to="/login">Log in to write a review</Link>
                     </div>}
               </div>
