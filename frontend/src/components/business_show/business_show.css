@@ -19,9 +19,13 @@
   border-top: 1px solid #e6e6e6;
 }
 
-.business-show-sidebar-list {
+.business-show-sidebar {
   position: sticky;
   top: 18px;
+  height: 100%;
+}
+
+.business-show-sidebar-list {
   width: 319px;
   padding: 6px;
   border: 1px solid #e6e6e6;
@@ -45,6 +49,17 @@
   margin-right: 10px;
   font-size: 19px;
   color: #666;
+}
+
+.business-show-sidebar > a {
+  background-image: url("../../public/Octocat.png");
+  height: 319px;
+  width: 319px;
+  background-size: cover;
+  background-color: #e6e6e6;
+  cursor: pointer;
+  margin-top: 12px;
+  border-radius: 4px;
 }
 
 .business-show-header {

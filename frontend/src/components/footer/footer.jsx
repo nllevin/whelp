@@ -11,9 +11,9 @@ const Footer = () => (
         <a href="https://github.com/nllevin/whelp">About Whelp</a>
       </div>
       <div className="footer-column">
-        <h3>Whelp for Employers</h3>
-        <a className="project-link" href="https://github.com/nllevin">Noah Levin</a>
-        <a className="project-link" href="https://github.com/Patrick-Mondala">Patrick Mondala</a>
+        <h3>Github</h3>
+        <a href="https://github.com/nllevin">Noah Levin</a>
+        <a href="https://github.com/Patrick-Mondala">Patrick Mondala</a>
       </div>
     </div>
     <figure className="footer-cityscape" />

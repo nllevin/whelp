@@ -361,6 +361,8 @@ class BusinessShow extends React.Component {
               <li><i className="fab fa-github-square"></i><a className="project-link" href="https://github.com/Patrick-Mondala">Patrick Mondala</a></li>
               <li><i className="fab fa-github-square"></i><a className="project-link" href="https://github.com/nllevin">Noah Levin</a></li>
             </ul>
+            <a href="https://github.com/Patrick-Mondala"></a>
+            <a href="https://github.com/nllevin"></a>
           </aside>
         </div>
       </div>
