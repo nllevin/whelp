@@ -114,7 +114,7 @@ class ReviewForm extends React.Component {
               </div>
               <textarea 
                 className="review-form-textarea" cols="70" rows="10"
-                placeholder="Your review helps others learn about great local businesses.&#10;Please don't review this business if you received a freebie for writing this review, or if you're connected in any way to the owner or employees."
+                placeholder="Your review helps others learn about great local businesses.U+000APlease don't review this business if you received a freebie for writing this review, or if you're connected in any way to the owner or employees."
                 value={this.state.body}
                 onChange={this.update}></textarea>
             </form>
