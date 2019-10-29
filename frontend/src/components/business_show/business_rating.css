@@ -3,7 +3,7 @@
   background-image: url("../../public/stars.png");
   width: 132px;
   height: 24px;
-  background-size: 132px 563px;
+  background-size: 132px 560px;
   margin-right: 6px;
   display: inline-block;
 }
@@ -48,7 +48,7 @@
 
 .business-show-price-rating {
   margin-top: 6px;
-  margin-bottom: 6px;
+  margin-bottom: 18px;
   line-height: 24px;
   font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
 }
