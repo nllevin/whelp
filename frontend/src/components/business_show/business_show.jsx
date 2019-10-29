@@ -110,29 +110,30 @@ class BusinessShow extends React.Component {
                       className={`review-form-half-stars-${(
                         Math.round((this.state.rating) * 2))}`}>
                       <div
-                        onClick={() => this.props.history.push(`/businesses/${business._id}/review`)}
+                        onClick={() => this.props.history.push(`/businesses/${business._id}/review/1`)}
                         onMouseOver={this.hoverRating(1)}
                         className="review-form-star-select-option"></div>
                       <div
-                        onClick={() => this.props.history.push(`/businesses/${business._id}/review`)}
+                        onClick={() => this.props.history.push(`/businesses/${business._id}/review/2`)}
                         onMouseOver={this.hoverRating(2)}
                         className="review-form-star-select-option"></div>
                       <div
-                        onClick={() => this.props.history.push(`/businesses/${business._id}/review`)}
+                        onClick={() => this.props.history.push(`/businesses/${business._id}/review/3`)}
                         onMouseOver={this.hoverRating(3)}
                         className="review-form-star-select-option"></div>
                       <div
-                        onClick={() => this.props.history.push(`/businesses/${business._id}/review`)}
+                        onClick={() => this.props.history.push(`/businesses/${business._id}/review/4`)}
                         onMouseOver={this.hoverRating(4)}
                         className="review-form-star-select-option"></div>
                       <div
-                        onClick={() => this.props.history.push(`/businesses/${business._id}/review`)}
+                        onClick={() => this.props.history.push(`/businesses/${business._id}/review/5`)}
                         onMouseOver={this.hoverRating(5)}
                         className="review-form-star-select-option"></div>
                     </span>
                     <Link 
+
                       className="review-creator-link" 
-                      to={`/businesses/${business._id}/review`}>
+                      to={`/businesses/${business._id}/review/0`}>
                       Start your review of<strong>{business.name}</strong>.
                     </Link>
                   </div>

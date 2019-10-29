@@ -14,7 +14,7 @@ const App = () => (
     <AuthRoute path='/login' component={LoginForm} />
     <AuthRoute path='/signup' component={SignupForm} />
     <ProtectedRoute path='/businesses/:businessId/review/edit' component={EditReviewForm} />
-    <ProtectedRoute path='/businesses/:businessId/review' component={CreateReviewForm} />
+    <ProtectedRoute path='/businesses/:businessId/review/:selectedRating' component={CreateReviewForm} />
     <Route path='/businesses/:businessId' component={BusinessShow} />
     <Route path='/splash' component={Splash} />
   </Switch>
