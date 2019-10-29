@@ -120,10 +120,17 @@
   font-size: 14px;
 }
 
-.business-show-schedule-open-now {
-  color: #41a700;
+.business-show-schedule-open-message {
   font-weight: 700;
   font-size: 12px;
+}
+
+.business-show-schedule-open-now {
+    color: #41a700;
+}
+
+.business-show-schedule-closed-now {
+  color: #d32323;
 }
 
 .business-show-review-form-starter {

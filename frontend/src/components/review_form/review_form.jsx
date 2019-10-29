@@ -10,6 +10,7 @@ class ReviewForm extends React.Component {
     super(props);
     this.state = this.props.currentUserReview;
     this.state['selected'] = this.props.currentUserReview.rating;
+    this.state['submitError'] = false;
     this.handleSubmit = this.handleSubmit.bind(this);
     this.update = this.update.bind(this);
     this.selectRating = this.selectRating.bind(this);
@@ -31,15 +32,19 @@ class ReviewForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    if (this.props.formType === 'edit') {
-      this.props.formAction(this.state._id, this.state).then(() => this.props.history.push(`/businesses/${this.state.businessId}`));
+    if (this.state.selected === 0 || this.state.body.length === 0) {
+      this.setState({submitError: true});
     } else {
-      this.props.formAction(this.state).then(() => this.props.history.push(`/businesses/${this.state.businessId}`));
+      if (this.props.formType === 'edit') {
+        this.props.formAction(this.state._id, this.state).then(() => this.props.history.push(`/businesses/${this.state.businessId}`));
+      } else {
+        this.props.formAction(this.state).then(() => this.props.history.push(`/businesses/${this.state.businessId}`));
+      }
     }
   }
 
   update(e) {
-    this.setState({body: e.target.value})
+    this.setState({ body: e.target.value }, this.setState({ submitError: false }));
   }
 
   ratingMessage(rating) {
@@ -114,10 +119,14 @@ class ReviewForm extends React.Component {
               </div>
               <textarea 
                 className="review-form-textarea" cols="70" rows="10"
-                placeholder="Your review helps others learn about great local businesses.U+000APlease don't review this business if you received a freebie for writing this review, or if you're connected in any way to the owner or employees."
+                placeholder="Your review helps others learn about great local businesses.           Please don't review this business if you received a freebie for writing this review, or if you're connected in any way to the owner or employees."
                 value={this.state.body}
                 onChange={this.update}></textarea>
             </form>
+            <div className={this.state.submitError ? 'review-errors-container' : 'hidden'}>
+              {this.state.selected < 1 ? <span className="review-rating-error">Rate this business to submit your review</span> : null}
+              {this.state.body.length === 0 ? <span className="review-body-error">Woah, did you mean to post so soon? We thought your review was just getting started! Please add more details so we can post this review.</span> : null}
+            </div>
             <button
               className="review-form-submit-button"
               onClick={this.handleSubmit}>Post Review</button>

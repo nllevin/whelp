@@ -50,3 +50,36 @@
 .review-form-submit-button:hover {
   background-color: #dc4f4f;
 }
+
+.review-errors-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  margin-top: -80px;
+  height: 200px;
+  width: 625px;
+  padding: 18px;
+}
+
+@keyframes easeIntoIt {
+  0% {
+    top: 30px;
+    opacity: 0;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+.review-errors-container > span {
+  animation: easeIntoIt 0.3s;
+  position: relative;
+  color: #d32323;
+  font-size: 14px;
+}
+
+
+.hidden {
+  display: none;
+}

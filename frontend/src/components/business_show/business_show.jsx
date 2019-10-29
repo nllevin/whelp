@@ -214,7 +214,7 @@ class BusinessShow extends React.Component {
                       <tr key={`schedule-item-${schedule._id}`} className="business-show-schedule-trst-item">
                         <th className="business-show-schedule-day">{schedule.day.slice(0, 3)}</th>
                         <td className="business-show-schedule-time">{parseInt(schedule.startTime) < 12 ? schedule.startTime + " am" : (parseInt(schedule.startTime.slice(0,2)) - 12) + schedule.startTime.slice(2) + " pm"} - {parseInt(schedule.endTime) < 12 ? schedule.endTime + " am" : (parseInt(schedule.endTime.slice(0,2)) - 12) + schedule.endTime.slice(2) + " pm"}</td>
-                        <td className="business-show-schedule-open-now">{currentDay === schedule.day && parseInt(schedule.startTime) < parseInt(currentTime) && parseInt(currentTime) < parseInt(schedule.endTime) ? "Open now" : null}</td>
+                        <td className="business-show-schedule-open-message">{currentDay === schedule.day ? (parseInt(schedule.startTime) < parseInt(currentTime) && parseInt(currentTime) < parseInt(schedule.endTime) ? <span className="business-show-schedule-open-now">Open now</span> : <span className="business-show-schedule-closed-now">Closed now</span>) : null}</td>
                       </tr>
                     ) : null}
                     </tbody>
