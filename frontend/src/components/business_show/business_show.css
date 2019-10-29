@@ -99,6 +99,7 @@
   border-top: 1px solid #e6e6e6; /* remove this border later, doesn't actually exist */
   padding: 12px;
   font-size: 14px;
+  line-height: 18px;
 }
 
 .business-show-schedule-list {
