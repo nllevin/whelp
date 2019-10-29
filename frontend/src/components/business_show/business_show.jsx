@@ -33,6 +33,7 @@ import dogImage27 from '../../public/dog-image-27.jpg'
 import dogImage28 from '../../public/dog-image-28.jpg'
 import dogImage29 from '../../public/dog-image-29.jpg'
 import dogImage30 from '../../public/dog-image-30.jpg'
+import mapMarker from '../../public/map-marker.png';
 
 import '../reset.css';
 import './business_show.css';
@@ -93,7 +94,8 @@ class BusinessShow extends React.Component {
     const position = new google.maps.LatLng(business.lat, business.lng);
     new google.maps.Marker({
       position,
-      map
+      map,
+      icon: mapMarker
     });
   }
 
