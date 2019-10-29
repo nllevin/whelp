@@ -9,13 +9,38 @@ import './business_rating.css';
 import '../review_index/review_index.css';
 
 class BusinessShow extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {rating: 0}
+    this.resetRatingToSelected = this.resetRatingToSelected.bind(this);
+  }
+
   componentDidMount() {
-    this.props.fetchBusinessAndReviewsWithAuthors(this.props.match.params.businessId);
+    this._isMounted = true;
+    if (this.props.match.params.businessId) 
+      this.props.fetchBusinessAndReviewsWithAuthors(this.props.match.params.businessId)
+        .catch(() => this.props.history.push("/splash"));
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.match.params.businessId !== this.props.match.params.businessId)
-      this.props.fetchBusinessAndReviewsWithAuthors(this.props.match.params.businessId);
+    if (this._isMounted && this.props.match.params.businessId && prevProps.match.params.businessId !== this.props.match.params.businessId)
+      this.props.fetchBusinessAndReviewsWithAuthors(this.props.match.params.businessId)
+        .catch(() => this.props.history.push("/splash"));
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
+  hoverRating(rating) {
+    return e => {
+      e.preventDefault();
+      this.setState({ rating: rating })
+    }
+  }
+
+  resetRatingToSelected() {
+    this.setState({ rating: 0 });
   }
 
   render() {
@@ -80,13 +105,31 @@ class BusinessShow extends React.Component {
                 {Object.keys(currentUser).length > 0 ?
                   (Object.keys(currentUserReview).length === 0 ?
                   <div className="review-form-creator">
-                    <div className="review-form-star-rating">
-                      <span className="one-star"></span>
-                      <span className="two-stars"></span>
-                      <span className="three-stars"></span>
-                      <span className="four-stars"></span>
-                      <span className="five-stars"></span>
-                    </div>
+                    <span
+                      onMouseOut={this.resetRatingToSelected}
+                      className={`review-form-half-stars-${(
+                        Math.round((this.state.rating) * 2))}`}>
+                      <div
+                        onClick={() => this.props.history.push(`/businesses/${business._id}/review`)}
+                        onMouseOver={this.hoverRating(1)}
+                        className="review-form-star-select-option"></div>
+                      <div
+                        onClick={() => this.props.history.push(`/businesses/${business._id}/review`)}
+                        onMouseOver={this.hoverRating(2)}
+                        className="review-form-star-select-option"></div>
+                      <div
+                        onClick={() => this.props.history.push(`/businesses/${business._id}/review`)}
+                        onMouseOver={this.hoverRating(3)}
+                        className="review-form-star-select-option"></div>
+                      <div
+                        onClick={() => this.props.history.push(`/businesses/${business._id}/review`)}
+                        onMouseOver={this.hoverRating(4)}
+                        className="review-form-star-select-option"></div>
+                      <div
+                        onClick={() => this.props.history.push(`/businesses/${business._id}/review`)}
+                        onMouseOver={this.hoverRating(5)}
+                        className="review-form-star-select-option"></div>
+                    </span>
                     <Link 
                       className="review-creator-link" 
                       to={`/businesses/${business._id}/review`}>
@@ -97,7 +140,7 @@ class BusinessShow extends React.Component {
                         <div className="review-index-item-rating-and-date">
                           <span className={`half-stars-${(
                             Math.round((currentUserReview.rating) * 2))}`}></span>
-                          <span>{currentUserReview.createdAt.slice(0, 10)}</span>
+                          <span className="review-index-item-date">{currentUserReview.createdAt.slice(0, 10)}</span>
                         </div>
                         <p className="review-index-item-body">{currentUserReview.body}</p>
                         <div className="current-user-review-options">

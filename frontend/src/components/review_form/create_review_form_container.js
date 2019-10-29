@@ -11,7 +11,8 @@ const mapStateToProps = (state, ownProps) => ({
     businessId: ownProps.match.params.businessId || null,
     businessName: state.entities.businesses[ownProps.match.params.businessId] ? state.entities.businesses[ownProps.match.params.businessId].name : null,
     body: '',
-    rating: 1
+    rating: 0,
+    selected: 0
   },
   formType: 'create'
 });

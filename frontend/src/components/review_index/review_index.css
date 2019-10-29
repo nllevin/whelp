@@ -43,6 +43,10 @@
   margin-bottom: 6px;
 }
 
+.review-index-item-date {
+  font-size: 14px;
+}
+
 .review-author-avatar {
   background-image: url("../../public/default_avatar.png");
   height: 60px;

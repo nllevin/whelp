@@ -19,7 +19,7 @@ const ReviewItem = ({ review, author }) => (
       <div className="review-index-item-rating-and-date">
         <span className={`half-stars-${(
         Math.round((review.rating) * 2))}`}></span>
-        <span>{review.createdAt.slice(0,10)}</span>
+        <span className="review-index-item-date">{review.createdAt.slice(0,10)}</span>
       </div>
       <p>{review.body}</p>
     </div>

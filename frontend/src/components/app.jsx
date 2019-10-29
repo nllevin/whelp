@@ -13,10 +13,10 @@ const App = () => (
   <Switch>
     <AuthRoute path='/login' component={LoginForm} />
     <AuthRoute path='/signup' component={SignupForm} />
-    <Route path='/splash' component={Splash} />
     <ProtectedRoute path='/businesses/:businessId/review/edit' component={EditReviewForm} />
     <ProtectedRoute path='/businesses/:businessId/review' component={CreateReviewForm} />
     <Route path='/businesses/:businessId' component={BusinessShow} />
+    <Route path='/splash' component={Splash} />
   </Switch>
 );
 
