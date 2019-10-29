@@ -1,7 +1,7 @@
 .footer-container {
   border-top: 1px solid #ccc;
   min-width: 1020px;
-  min-height: 100vh;
+  /* min-height: 100vh; how to make footer stretch to bottom of page? */
   background-color: rgb(245, 245, 245);
 }
 

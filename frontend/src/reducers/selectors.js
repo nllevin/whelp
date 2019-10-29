@@ -3,7 +3,7 @@ export const getUserById = (state, userId) => (
 );
 
 export const getBusinessesSearchResults = state => (
-  state.session.searchResults ? 
-    state.session.searchResults.map(businessId => state.entities.businesses[businessId])
+  state.ui.filters.searchResults ? 
+    state.ui.filters.searchResults.map(businessId => state.entities.businesses[businessId])
     : []
 );

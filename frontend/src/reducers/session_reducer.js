@@ -3,12 +3,9 @@ import {
   RECEIVE_USER_LOGOUT
 } from '../actions/session_actions';
 
-import { RECEIVE_BUSINESSES_SEARCH } from '../actions/business_actions';
-
 const initialState = {
   isAuthenticated: false,
-  currentUserId: null,
-  searchResults: []
+  currentUserId: null
 };
 
 const sessionReducer = (state = initialState, action) => {
@@ -24,10 +21,6 @@ const sessionReducer = (state = initialState, action) => {
         isAuthenticated: false,
         currentUserId: null
       };
-    case RECEIVE_BUSINESSES_SEARCH:
-      const newState = Object.assign({}, state);
-      newState.searchResults = action.searchResults;
-      return newState;
     default:
       return state;
   }
