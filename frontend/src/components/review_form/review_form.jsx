@@ -75,7 +75,7 @@ class ReviewForm extends React.Component {
   }
 
   render() {
-    const { business, formType } = this.props;
+    const { business } = this.props;
 
     return (
       <div className="review-form-content-container">

@@ -26,7 +26,6 @@
   padding: 6px;
   border: 1px solid #e6e6e6;
   border-radius: 4px;
-  z-index: -1;
 }
 
 .business-show-sidebar-list > li {
@@ -45,9 +44,6 @@
 .business-show-sidebar-list > li > i {
   margin-right: 10px;
   font-size: 19px;
-}
-
-.business-sidebar-phone-icon, .business-sidebar-directions-icon {
   color: #666;
 }
 
@@ -273,4 +269,14 @@
   background-repeat: no-repeat;
   height: 220px;
   object-fit: cover;
+}
+
+.project-link {
+  cursor: pointer;
+  color: #0073bb;
+}
+
+
+.project-link:hover {
+  text-decoration: underline;
 }
