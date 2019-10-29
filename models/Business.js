@@ -33,6 +33,7 @@ const BusinessSchema = new Schema({
   priceRating: {
     type: Number
   },
+  imageUrl: { type: String },
   createdAt: {
     type: Date,
     default: Date.now
@@ -40,6 +41,11 @@ const BusinessSchema = new Schema({
 });
 
 BusinessSchema.index({name: 1, address: 1}, {unique: true});
+BusinessSchema.virtual("reviews", {
+  ref: "Review",
+  localField: "_id",
+  foreignField: "businessId"
+});
 
 const Business = mongoose.model('Business', BusinessSchema);
 module.exports = Business;

@@ -8,16 +8,21 @@ import Splash from './splash/splash';
 import BusinessShow from './business_show/business_show_container';
 import CreateReviewForm  from './review_form/create_review_form_container';
 import EditReviewForm from './review_form/edit_review_form_container';
+import BusinessIndexContainer from './business_index/business_index_container';
+import Footer from './footer/footer';
 
 const App = () => (
   <Switch>
-    <AuthRoute path='/login' component={LoginForm} />
-    <AuthRoute path='/signup' component={SignupForm} />
-    <ProtectedRoute path='/businesses/:businessId/review/edit' component={EditReviewForm} />
-    <ProtectedRoute path='/businesses/:businessId/review/:selectedRating' component={CreateReviewForm} />
-    <Route path='/businesses/:businessId' component={BusinessShow} />
-    <Route path='/splash' component={Splash} />
-  </Switch>
+      <AuthRoute path='/login' component={LoginForm} />
+      <AuthRoute path='/signup' component={SignupForm} />
+      <Route path='/businesses/search' component={BusinessIndexContainer} />
+      <ProtectedRoute path='/businesses/:businessId/review/edit' component={EditReviewForm} />
+      <ProtectedRoute path='/businesses/:businessId/review/:selectedRating' component={CreateReviewForm} />
+      <Route path='/businesses/:businessId' component={BusinessShow} />
+      <Route path='/' component={Splash} />
+    </Switch>
+    <Footer />
+  </div>
 );
 
 export default App;

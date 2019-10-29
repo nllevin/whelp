@@ -1,10 +1,15 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import './search_bar.css';
 
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { business: "", location: "" }
+    this.state = { 
+      businessQuery: "", 
+      location: ""
+    };
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   componentDidMount() {
@@ -21,35 +26,41 @@ class SearchBar extends React.Component {
     }
   }
 
+  handleSearch(e) {
+    e.preventDefault();
+    this.props.history.push(`/businesses/search?q=${this.state.businessQuery}&loc=${this.state.location}`);
+  }
+
   update(field) {
     return e => this.setState({ [field]: e.target.value });
   }
 
   render() {
     return (
-      <div className="search-bar-container">
-        <div className="search-business-container">
+      <form className="search-bar-container" onSubmit={this.handleSearch}>
+        <label className="search-business-container">
           <span>Find</span>
           <input 
             type="text" 
             placeholder="grooming, Happy Dogs Hotel"
-            onChange={this.update("business")} 
+            value={this.state.businessQuery}
+            onChange={this.update("businessQuery")} 
           />
-        </div>
-        <div className="search-location-container">
+        </label>
+        <label className="search-location-container">
           <span>Near</span>
           <input 
             type="text" 
             value={this.state.location}
             onChange={this.update("location")} 
           />
-        </div>
-        <div className="search-icon-container">
+        </label>
+        <button className="search-icon-container">
           <i className="search-icon"></i>
-        </div>
-      </div>
+        </button>
+      </form>
     );
   }
 }
 
-export default SearchBar;
+export default withRouter(SearchBar);

@@ -31,7 +31,11 @@ class ProfileDropdown extends React.Component {
     return (
       <div className="profile-dropdown-container" ref={node => this.node = node}>
         <div className="profile-dropdown-info-container">
-          <i className="profile-dropdown-photo"></i>
+          {
+            currentUser && currentUser.avatarUrl ?
+            <img className="profile-dropdown-photo" src={currentUser.avatarUrl} alt="profile avatar" />
+            : <i className="profile-dropdown-photo"></i>
+          }
           <div className="profile-dropdown-info">
             <span>{`${currentUser.firstName} ${currentUser.lastName[0]}.`}</span>
             <span>{currentUser.zipCode}</span>                                      {/* Use Google API to change to city, state */}

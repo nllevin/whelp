@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SearchBar from '../search_bar/search_bar';
+import GreetingContainer from '../header_nav/greeting_container';
 import './splash.css';
 
 const Splash = () => (
@@ -9,10 +10,7 @@ const Splash = () => (
       <div>
         {/* potentially Write a Review, Events, & Talk */}
       </div>
-      <div className="splash-session-links">
-        <Link to='/login' className="splash-log-in-button">Log In</Link>
-        <Link to='/signup' className="splash-sign-up-button">Sign Up</Link>
-      </div>
+      <GreetingContainer />
     </header>
     <div className="splash-main">
       <div className="splash-icon-container">
@@ -21,6 +19,10 @@ const Splash = () => (
         </div>
       </div>
       <SearchBar />
+      <footer className="splash-footer">
+        <span>Gold Coast, Australia</span>
+        <span>Photo by <a href="https://unsplash.com/@leio">Leio M.</a></span>
+      </footer>
     </div>
   </div>
 );

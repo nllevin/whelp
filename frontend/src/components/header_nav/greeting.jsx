@@ -32,7 +32,11 @@ class Greeting extends React.Component {
     const loggedInGreeting = (
       <div className="greeting-container">
         <button className="profile-dropdown-button" onClick={this.toggleDropdown}>
-          <i className="profile-avatar"></i>
+          {
+            currentUser && currentUser.avatarUrl ?
+              <img className="profile-avatar" src={currentUser.avatarUrl} alt="profile avatar"/>
+              : <i className="profile-avatar"></i>
+          }
           <span className="profile-down-arrow"></span>
         </button>
         {

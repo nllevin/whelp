@@ -38,9 +38,6 @@
 
 .profile-dropdown-button {
   display: flex;
-}
-
-.profile-dropdown-button {
   border-radius: 4px;
   width: 58px;
   height: 36px;
