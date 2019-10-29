@@ -320,7 +320,7 @@ class BusinessShow extends React.Component {
             <ul className="business-show-sidebar-list">
               {business.phoneNumber ? <li><i className="fas fa-phone-alt business-sidebar-phone-icon"></i>{business.phoneNumber}</li> : null}
               {business.address ? <li><i className="fas fa-directions business-sidebar-directions-icon"></i>{business.address}</li> : null}
-              <li><i className="fab fa-github"></i><a className="project-link" href="https://github.com/nllevin/whelp">https://github.com/nllevin/whelp</a></li>
+              <li><i className="fab fa-github"></i><a className="project-link" href="https://github.com/nllevin/whelp">Github Repository</a></li>
               <li><i className="fab fa-github-square"></i><a className="project-link" href="https://github.com/Patrick-Mondala">Patrick Mondala</a></li>
               <li><i className="fab fa-github-square"></i><a className="project-link" href="https://github.com/nllevin">Noah Levin</a></li>
             </ul>
