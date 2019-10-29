@@ -5,6 +5,7 @@
 }
 
 .footer-content {
+  display: flex;
   width: 990px;
   padding: 36px 15px 18px 15px;
   margin: 0 auto;
