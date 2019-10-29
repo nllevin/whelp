@@ -3,7 +3,7 @@
   background-image: url("../../public/stars.png");
   width: 132px;
   height: 24px;
-  background-size: 132px 563px;
+  background-size: 132px 560px;
   margin-right: 6px;
   display: inline-block;
 }
@@ -13,42 +13,42 @@
 }
 
 .business-half-stars-3 {
-  background-position-y: calc(-25px - 24px);
+  background-position-y: calc(-24px - 24px);
 }
 
 .business-half-stars-4 {
-  background-position-y: calc(-25px - 2 * 24px);
+  background-position-y: calc(-24px - 2 * 24px);
 }
 
 .business-half-stars-5 {
-  background-position-y: calc(-25px - 3 * 24px);
+  background-position-y: calc(-24px - 3 * 24px);
 }
 
 .business-half-stars-6 {
-  background-position-y: calc(-25px - 4 * 24px);
+  background-position-y: calc(-24px - 4 * 24px);
 }
 
 .business-half-stars-7 {
-  background-position-y: calc(-25px - 5 * 24px);
+  background-position-y: calc(-24px - 5 * 24px);
 }
 
 .business-half-stars-8 {
-  background-position-y: calc(-25px - 6 * 24px);
+  background-position-y: calc(-24px - 6 * 24px);
 }
 
 .business-half-stars-9 {
-  background-position-y: calc(-25px - 7 * 24px);
+  background-position-y: calc(-24px - 7 * 24px);
 }
 
 .business-half-stars-10 {
-  background-position-y: calc(-25px - 8 * 24px);
+  background-position-y: calc(-24px - 8 * 24px);
 }
 
 /* price rating */
 
 .business-show-price-rating {
   margin-top: 6px;
-  margin-bottom: 6px;
+  margin-bottom: 18px;
   line-height: 24px;
   font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
 }
