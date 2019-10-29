@@ -30,7 +30,6 @@
   padding: 6px;
   border: 1px solid #e6e6e6;
   border-radius: 4px;
-  z-index: -1;
 }
 
 .business-show-sidebar-list > li {
@@ -49,6 +48,7 @@
 .business-show-sidebar-list > li > i {
   margin-right: 10px;
   font-size: 19px;
+  color: #666;
 }
 
 .business-show-sidebar > a {
@@ -60,10 +60,6 @@
   cursor: pointer;
   margin-top: 12px;
   border-radius: 4px;
-}
-
-.business-sidebar-phone-icon, .business-sidebar-directions-icon {
-  color: #666;
 }
 
 .business-show-header {
@@ -138,10 +134,17 @@
   font-size: 14px;
 }
 
-.business-show-schedule-open-now {
-  color: #41a700;
+.business-show-schedule-open-message {
   font-weight: 700;
   font-size: 12px;
+}
+
+.business-show-schedule-open-now {
+    color: #41a700;
+}
+
+.business-show-schedule-closed-now {
+  color: #d32323;
 }
 
 .business-show-review-form-starter {
@@ -289,4 +292,14 @@
   background-repeat: no-repeat;
   height: 220px;
   object-fit: cover;
+}
+
+.project-link {
+  cursor: pointer;
+  color: #0073bb;
+}
+
+
+.project-link:hover {
+  text-decoration: underline;
 }
