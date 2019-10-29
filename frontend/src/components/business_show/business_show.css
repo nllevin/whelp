@@ -257,3 +257,20 @@
   align-items: center;
   margin-bottom: 15px;
 }
+
+.business-show-rating-container {
+  display: flex;
+  align-items: center;
+}
+
+.business-show-carousel {
+  height: 220px;
+}
+
+.business-show-carousel-img {
+  background-image: url('../../public/dog-image-1.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 220px;
+  object-fit: cover;
+}
