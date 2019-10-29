@@ -5,22 +5,29 @@ class SearchMap extends React.Component {
   constructor(props) {
     super(props);
     this.markers = {};
+    this.handleIdle = this.handleIdle.bind(this);
   }
 
   componentDidMount() {
     this.constructMap();
   }
 
-  componentDidUpdate() {
-    this.constructMap();
+  componentDidUpdate(prevProps) {
+    if (this.props.lat !== prevProps.lat || this.props.lng !== prevProps.lng) {
+      this.map.setCenter({
+        lat: parseFloat(this.props.lat),
+        lng: parseFloat(this.props.lng)
+      });
+    }
+    this.updateMarkers();
   }
   
   constructMap() {
     const google = window.google;
     const mapOptions = {
       center: { 
-        lat: this.props.lat,
-        lng: this.props.lng 
+        lat: parseFloat(this.props.lat),
+        lng: parseFloat(this.props.lng) 
       },
       disableDefaultUI: true,
       gestureHandling: "cooperative",
@@ -32,7 +39,7 @@ class SearchMap extends React.Component {
       zoom: 11
     };
     this.map = new google.maps.Map(this.mapNode, mapOptions);
-    this.updateMarkers();
+    this.map.addListener("idle", this.handleIdle);
   }
 
   createMarker(business, idx) {
@@ -56,21 +63,23 @@ class SearchMap extends React.Component {
     this.markers[business._id] = marker;
   }
 
+  handleIdle() {
+    if (this.props.isSearching || true) {               // make live map reload optional later
+      const bounds = this.map.getBounds();
+      const southWest = bounds.getSouthWest();
+      const northEast = bounds.getNorthEast();
+      this.props.triggerSearch({
+        southWest: { lat: southWest.lat(), lng: southWest.lng() },
+        northEast: { lat: northEast.lat(), lng: northEast.lng() }
+      });
+    } 
+    this.updateMarkers();
+  }
+
   updateMarkers() {
-    const businesses = {};
+    this.markers = {};
     this.props.businesses.forEach((business, idx) => {
-      businesses[business._id] = business;
-      if (!this.markers[business._id]) {
-        this.createMarker(business, idx);
-      } else {
-        this.markers[business._id].setMap(this.map);
-      }
-    });
-    Object.keys(this.markers).forEach(businessId => {
-      if (!businesses[businessId]) {
-        this.markers[businessId].setMap(null);
-        delete this.markers[businessId];
-      }
+      this.createMarker(business, idx);
     });
   }
 
@@ -79,10 +88,11 @@ class SearchMap extends React.Component {
       <div className="search-map-container">
         <header>
           <h3>Search Map</h3>
-          <label>
+          {/* <label>                           // make live map reload optional later
             <input type="checkbox"/>
             Redo search when map is moved
-          </label>
+          </label> */}
+          <label>Drag Map for New Search</label>
         </header>
         <div className="search-map" ref={map => this.mapNode = map}></div>
       </div>
