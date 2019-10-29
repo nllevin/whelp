@@ -2,7 +2,7 @@ import {
   RECEIVE_REVIEW,
   REMOVE_REVIEW
 } from '../actions/review_actions';
-import { RECEIVE_BUSINESS_AND_REVIEWS } from '../actions/business_actions';
+import { RECEIVE_BUSINESS_AND_REVIEWS_WITH_AUTHORS } from '../actions/business_actions';
 
 const reviewsReducer = (state = {}, action) => {
   Object.freeze(state);
@@ -13,11 +13,11 @@ const reviewsReducer = (state = {}, action) => {
       let newState = Object.assign({}, state);
       delete newState[action.reviewId];
       return newState;
-    case RECEIVE_BUSINESS_AND_REVIEWS:
+    case RECEIVE_BUSINESS_AND_REVIEWS_WITH_AUTHORS:
       return Object.assign({}, state, action.reviews);
     default:
       return state;
   }
-}
+};
 
 export default reviewsReducer;

@@ -25,7 +25,7 @@ router.post('/',
 );
 
 router.patch('/:id', (req, res) => {
-  Review.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, review) => {
+  Review.findByIdAndUpdate(req.params.id, req.body, { new: true, useFindAndModify: false }, (err, review) => {
     if (!review) return res.status.json(404).json({ noreviewfound: 'No review found with that ID'});
     if (err) return res.status.json(500).json({ failedreviewedit: 'Problem editing review' });
     res.status(200).json(review);
@@ -33,7 +33,7 @@ router.patch('/:id', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-  Review.findByIdAndDelete(req.params.id, (err, review) => {
+  Review.findByIdAndDelete(req.params.id, { useFindAndModify: false }, (err, review) => {
     if (err) return res.status.json({ failedreviewdelete: 'Problem deleting review' });
     res.status(200).json(review);
   });

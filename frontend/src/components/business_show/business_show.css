@@ -1,0 +1,259 @@
+.business-show-container {
+}
+
+.business-show-content-container {
+  display: flex;
+  padding: 18px 30px;
+  margin: 0 auto;
+  width: 1020px;
+  justify-content: space-between;
+}
+
+.business-show-content {
+  display: flex;
+  flex-direction: column;
+  width: 605px;
+}
+
+.business-show-content > div:nth-child(n + 2) {
+  border-top: 1px solid #e6e6e6;
+}
+
+.business-show-sidebar-list {
+  position: sticky;
+  top: 18px;
+  width: 319px;
+  padding: 6px;
+  border: 1px solid #e6e6e6;
+  border-radius: 4px;
+  z-index: -1;
+}
+
+.business-show-sidebar-list > li {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  line-height: 1.28571em;
+  width: 305px;
+  padding: 14px 11px 11px 11px;
+}
+
+.business-show-sidebar-list > li:nth-child(n + 2) {
+  border-top: 1px solid #e6e6e6;
+}
+
+.business-show-sidebar-list > li > i {
+  margin-right: 10px;
+  font-size: 19px;
+}
+
+.business-sidebar-phone-icon, .business-sidebar-directions-icon {
+  color: #666;
+}
+
+.business-show-header {
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  font-weight: 700;
+  margin-bottom: 6px;
+  font-size: 30px;
+  line-height: 1.2em;
+  padding-top: 6px;
+}
+
+.business-show-location-and-schedule-content {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  margin-bottom: 24px;
+}
+
+.business-show-location-and-search-container-header {
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  font-weight: 700;
+  margin-bottom: 6px;
+  font-size: 16px;
+  line-height: 1.3125em;
+}
+
+.business-show-location-container {
+  width: 317px;
+  border: 1px solid #e6e6e6;
+  border-radius: 4px;
+}
+
+.business-show-location-map {
+  height: 150px;
+}
+
+.business-show-location-address {
+  display: flex;
+  align-items: center;
+  height: 58px;
+  border-top: 1px solid #e6e6e6; /* remove this border later, doesn't actually exist */
+  padding: 12px;
+}
+
+.business-show-location-map { /* replace this entire thing with real map css */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.business-show-schedule-list {
+  width: 258px;
+}
+
+.business-show-schedule-list > tbody > tr {
+  height: 18px;
+}
+
+.business-show-schedule-day {
+  min-width: 36px;
+  width: 52px;
+  text-align: start;
+  font-size: 14px;
+}
+
+.business-show-schedule-time {
+  text-align: start;
+  width: 121px;
+  font-size: 14px;
+}
+
+.business-show-schedule-open-now {
+  color: #41a700;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.business-show-review-form-starter {
+  display: flex;
+  justify-content: space-between;
+  padding: 18px 0;
+}
+
+.review-form-currentUser {
+  display: flex;
+  width: 222px;
+}
+
+.review-form-empty-profile {
+  background-image: url("../../public/empty_profile.png");
+  background-size: 148px;
+  height: 68px;
+  width: 148px;
+}
+
+.review-form-currentUser-avatar {
+  background-image: url("../../public/default_avatar.png");
+  height: 60px;
+  width: 60px;
+  border-radius: 4px;
+  border-color: transparent;
+}
+
+.review-form-currentUser-details {
+  margin-left: 6px;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1.28571em;
+}
+
+.review-form-item-currentUser-name {
+  font-size: 14px;
+}
+
+.review-form-currentUser-zipcode {
+  line-height: 1.5em;
+}
+
+.review-form-creator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 111px;
+  width: 356px;
+  padding: 12px;
+  background-color: #f5f5f5;
+  border: 1px solid #e6e6e6;
+  border-radius: 4px;
+  margin-right: 30px;
+}
+
+.review-creator-link {
+  display: flex;
+  color: #0073bb;
+  font-size: 14px;
+  border-top: 1px solid #e6e6e6;
+  padding-top: 12px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.review-creator-link > strong {
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.review-creator-link:hover {
+  text-decoration: underline;
+}
+
+.current-user-review-options {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
+.current-user-review-delete-button {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 12px;
+  line-height: 1.5em;
+  height: 30px;
+  width: 30px;
+  color: #999;
+}
+
+.current-user-review-delete-icon {
+  height: 18px;
+  width: 18px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.current-user-review-edit-link {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 12px;
+  color: #999;
+  line-height: 1.5em;
+  margin-right: 10px;
+}
+
+.current-user-edit-icon {
+  margin-right: 5px;
+}
+
+.current-user-review-delete-button:hover, .current-user-review-edit-link:hover {
+  cursor: pointer;
+  color: #333;
+  background: linear-gradient(#fff,#eee);
+}
+
+.current-user-review-delete-button:active, .current-user-review-edit-link:active {
+  color: #333;
+  background: linear-gradient(#f0f0f0,#fff);
+}
+
+.review-form-rating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
