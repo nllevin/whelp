@@ -3,39 +3,101 @@ import { withRouter } from 'react-router-dom';
 import HeaderNav from '../header_nav/header_nav';
 import BusinessIndexItem from './business_index_item';
 import SearchMap from './search_map';
-import './business_index.css';
 import '../reset.css';
+import './business_index.css';
+const APIKey = require('../../config/keys').googleAPI;
 
 class BusinessIndex extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      isMounting: true,
-      badLocQuery: false
-    };
-    this.setBadLocQuery = this.setBadLocQuery.bind(this);
+    if (!window.google) {
+      this.state = { 
+        isLoadingScript: true,
+        isMounting: true,
+        isFetchingCoords: true,
+        badLocQuery: false,
+        lat: "",
+        lng: ""
+      };
+      const script = document.createElement('script');
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${APIKey}`;
+      script.addEventListener('load', () => this.setState({ isLoadingScript: false }));
+      document.head.append(script);
+    } else {
+      this.state = { 
+        isLoadingScript: false,
+        isMounting: true,
+        isFetchingCoords: true,
+        badLocQuery: false,
+        lat: "",
+        lng: ""
+      };
+    }
   }
 
   componentDidMount() {
+    if (window.google) {
+      this.fetchCoordsFromLoc(
+        (new URLSearchParams(this.props.location.search)).get("loc")
+      );
+    }
+
     this.props.searchBusinesses(this.props.location.search)
       .then(() => this.setState({ isMounting: false }));
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.isLoadingScript && !this.state.isLoadingScript) {
+      this.fetchCoordsFromLoc(
+        (new URLSearchParams(this.props.location.search)).get("loc")
+      );
+    }
+
     if (this.props.location.search !== prevProps.location.search) {
-      this.setState({ badLocQuery: false });
-      this.props.searchBusinesses(this.props.location.search);
+      const newSearchParams = new URLSearchParams(this.props.location.search);
+      const oldSearchParams = new URLSearchParams(prevProps.location.search);
+
+      if (newSearchParams.get("q") !== oldSearchParams.get("q")) {
+        this.props.searchBusinesses(this.props.location.search);
+      }
+
+      if (newSearchParams.get("loc") !== oldSearchParams.get("loc")) {
+        this.setState({ isFetchingCoords: true });
+        this.fetchCoordsFromLoc(newSearchParams.get("loc"));
+      }
     }
   }
 
-  setBadLocQuery(badLocQuery) {
-    this.setState({ badLocQuery });
+  fetchCoordsFromLoc(loc) {
+    const google = window.google;
+    const geocoder = new google.maps.Geocoder();
+    geocoder.geocode({ address: loc }, (res, status) => {
+      if (status === "ZERO_RESULTS") {
+        this.setState({
+          isFetchingCoords: false,
+          badLocQuery: loc,
+          lat: "",
+          lng: ""
+        });
+      } else {
+        const pos = res[0].geometry.location;
+        this.setState({
+          isFetchingCoords: false,
+          badLocQuery: false,
+          lat: pos.lat(),
+          lng: pos.lng()
+        });
+      }
+    });
   }
 
   render() {
-    if (this.state.isMounting) return null;
+    if (this.state.isMounting || this.state.isLoadingScript || this.state.isFetchingCoords) {
+      return null;
+    }
 
     const { businesses, history } = this.props;
+    const { lat, lng, badLocQuery } = this.state;
     const searchParams = new URLSearchParams(this.props.location.search);
     const queryWords = searchParams.get("q").toLowerCase().split(" ");
 
@@ -84,15 +146,15 @@ class BusinessIndex extends React.Component {
       <div className="business-index-container">
         <HeaderNav />
         {
-          this.state.badLocQuery ? 
+          badLocQuery ? 
             badLocMessage : (
               <div className="business-index-content-container">
                 {businesses.length === 0 ? noResultsDisplay : resultsDisplay}
                 <aside className="business-index-sidebar">
                   <SearchMap 
                     businesses={businesses}
-                    loc={searchParams.get("loc")}
-                    setBadLocQuery={this.setBadLocQuery}
+                    lat={lat}
+                    lng={lng}
                     history={history}
                   />
                 </aside>

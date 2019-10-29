@@ -1,7 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import './search_bar.css';
-const APIKey = require('../../config/keys').googleAPI;
 
 class SearchBar extends React.Component {
   constructor(props) {

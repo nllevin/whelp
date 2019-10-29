@@ -1,29 +1,14 @@
 import React from 'react';
 import './search_map.css';
-const APIKey = require('../../config/keys').googleAPI;
 
 class SearchMap extends React.Component {
   constructor(props) {
     super(props);
-    if (!window.google) {
-      this.state = { isLoadingScript: true };
-      const script = document.createElement('script');
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${APIKey}`;
-      script.addEventListener('load', () => this.setState({ isLoadingScript: false }));
-      document.head.append(script);
-    } else {
-      this.state = { isLoadingScript: false };
-    }
-
     this.markers = {};
   }
 
   componentDidMount() {
-    if (this.state.isLoadingScript) {
-      return;
-    } else {
-      this.constructMap();
-    }
+    this.constructMap();
   }
 
   componentDidUpdate() {
@@ -32,30 +17,22 @@ class SearchMap extends React.Component {
   
   constructMap() {
     const google = window.google;
-    const geocoder = new google.maps.Geocoder();
-    geocoder.geocode({ address: this.props.loc }, (res, status) => {
-      if (status === "ZERO_RESULTS") {
-        this.props.setBadLocQuery(this.props.loc);
-      } else {
-        const pos = res[0].geometry.location;
-        const mapOptions = {
-          center: { 
-            lat: pos.lat(),
-            lng: pos.lng() 
-          },
-          disableDefaultUI: true,
-          gestureHandling: "cooperative",
-          keyboardShortcuts: true,
-          zoomControl: true,
-          zoomControlOptions: {
-            position: google.maps.ControlPosition.LEFT_TOP
-          },
-          zoom: 11
-        };
-        this.map = new google.maps.Map(this.mapNode, mapOptions);
-        this.updateMarkers();
-      }
-    });
+    const mapOptions = {
+      center: { 
+        lat: this.props.lat,
+        lng: this.props.lng 
+      },
+      disableDefaultUI: true,
+      gestureHandling: "cooperative",
+      keyboardShortcuts: true,
+      zoomControl: true,
+      zoomControlOptions: {
+        position: google.maps.ControlPosition.LEFT_TOP
+      },
+      zoom: 11
+    };
+    this.map = new google.maps.Map(this.mapNode, mapOptions);
+    this.updateMarkers();
   }
 
   createMarker(business, idx) {
@@ -98,8 +75,6 @@ class SearchMap extends React.Component {
   }
 
   render() {
-    if (this.state.isLoadingScript) return null;
-
     return (
       <div className="search-map-container">
         <header>
