@@ -5,30 +5,26 @@ import './search_bar.css';
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      businessQuery: "", 
-      location: ""
-    };
-    this.handleSearch = this.handleSearch.bind(this);
-  }
-
-  componentDidMount() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        this.setState({
-          location: `Latitude: ${position.coords.latitude}, Longitude: ${position.coords.longitude}`              // use Geocoding API here
-        });
-      });
-    } else {
-      this.setState({
-        location: "San Francisco, CA"
-      });
+    let businessQuery = "";
+    let locationQuery = "New York, New York";
+    if (this.props.location.search) {
+      const searchParams = new URLSearchParams(this.props.location.search);
+      businessQuery = searchParams.get("q");
+      locationQuery = searchParams.get("loc");
     }
+
+    this.state = { 
+      businessQuery,
+      locationQuery
+    };
+
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   handleSearch(e) {
     e.preventDefault();
-    this.props.history.push(`/businesses/search?q=${this.state.businessQuery}&loc=${this.state.location}`);
+    const { businessQuery, locationQuery } = this.state;
+    this.props.history.push(`/businesses/search?q=${businessQuery}&loc=${locationQuery}`);
   }
 
   update(field) {
@@ -36,6 +32,7 @@ class SearchBar extends React.Component {
   }
 
   render() {
+    const { businessQuery, locationQuery } = this.state;
     return (
       <form className="search-bar-container" onSubmit={this.handleSearch}>
         <label className="search-business-container">
@@ -43,7 +40,7 @@ class SearchBar extends React.Component {
           <input 
             type="text" 
             placeholder="grooming, Happy Dogs Hotel"
-            value={this.state.businessQuery}
+            value={businessQuery}
             onChange={this.update("businessQuery")} 
           />
         </label>
@@ -51,8 +48,8 @@ class SearchBar extends React.Component {
           <span>Near</span>
           <input 
             type="text" 
-            value={this.state.location}
-            onChange={this.update("location")} 
+            value={locationQuery}
+            onChange={this.update("locationQuery")} 
           />
         </label>
         <button className="search-icon-container">

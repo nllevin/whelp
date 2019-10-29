@@ -5,12 +5,22 @@ const Business = require('../models/Business');
 const Review = require('../models/Review');
 const faker = require('faker');
 const bcrypt = require('bcryptjs');
+const path = require('path');
+const fs = require('fs');
+
+const filePath = path.resolve(__dirname, 'city_of_new_york.csv');
+
 
 const seed = async function() {
   await mongoose
     .connect(db, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
     .then(() => console.log("Connected to MongoDB successfully. Ready to seed"))
     .catch(err => console.log(err));
+
+  let NYCAddresses;
+  await fs.readFile(filePath, { encoding: "utf-8" }, (err, data) => {
+    NYCAddresses = data.split("\n").slice(1);
+  });
 
   // delete old documents, create new arrays
   await Promise.all([
@@ -26,7 +36,7 @@ const seed = async function() {
     firstName: "Niles",
     lastName: "Mowgli",
     email: "kitty@aol.com",
-    zipCode: "94016",
+    zipCode: "10002",
     avatarUrl: `${faker.image.cats()}/3`,
     password: "hunter2"
   });
@@ -49,9 +59,13 @@ const seed = async function() {
 
   // construct business seeds, add to businesses array
   for (let i = 0; i < 10; i++) {
+    const addressData = NYCAddresses[Math.floor(Math.random() * 961807 + 1)].split(",");
+
     const newBusiness = new Business({
       name: faker.company.companyName(),
-      address: faker.address.streetAddress(),
+      address: `${addressData[2]} ${addressData[3]}, New York, New York ${addressData[addressData.length - 3]}`,
+      lat: addressData[1],
+      lng: addressData[0],
       phoneNumber: faker.phone.phoneNumber(),
       schedules: [
         { day: "Sunday", startTime: "9:00", endTime: "17:00" },

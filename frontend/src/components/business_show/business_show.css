@@ -71,6 +71,7 @@
   overflow-wrap: break-word;
   font-weight: 700;
   margin-bottom: 6px;
+  margin-top: 24px;
   font-size: 16px;
   line-height: 1.3125em;
 }
@@ -85,18 +86,16 @@
   height: 150px;
 }
 
+.business-show-location-map img {
+  cursor: default;
+}
+
 .business-show-location-address {
-  display: flex;
-  align-items: center;
   height: 58px;
   border-top: 1px solid #e6e6e6; /* remove this border later, doesn't actually exist */
   padding: 12px;
-}
-
-.business-show-location-map { /* replace this entire thing with real map css */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  font-size: 14px;
+  line-height: 18px;
 }
 
 .business-show-schedule-list {
@@ -199,7 +198,9 @@
 
 .review-creator-link > strong {
   font-weight: bold;
-  margin-left: 5px;
+  white-space: pre;
+  position: relative;
+  top: -1px;
 }
 
 .review-creator-link:hover {

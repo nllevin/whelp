@@ -44,7 +44,8 @@
   background-image: none;
   background-repeat: no-repeat;
   transition: all .6s;
-  margin: 28px 0;
+  margin-top: 28px;
+  margin-bottom: 24px;
 }
 
 .review-form-submit-button:hover {

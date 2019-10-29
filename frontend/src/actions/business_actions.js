@@ -1,6 +1,6 @@
 import * as APIBusinessUtil from '../util/business_api_util';
 
-export const RECEIVE_BUSINESSES_SEARCH = "RECEIVE_BUSINESSES";
+export const RECEIVE_BUSINESSES_SEARCH = "RECEIVE_BUSINESSES_SEARCH";
 export const RECEIVE_BUSINESS_AND_REVIEWS_WITH_AUTHORS = "RECEIVE_BUSINESS_AND_REVIEWS_WITH_AUTHORS";
 
 const receiveBusinessesSearch = data => ({
