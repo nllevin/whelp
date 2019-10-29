@@ -1,38 +1,46 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import './search_bar.css';
+const APIKey = require('../../config/keys').googleAPI;
 
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      businessQuery: "", 
-      lat: "",
-      lng: ""
-    };
-    this.handleSearch = this.handleSearch.bind(this);
-  }
-
-  componentDidMount() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        this.setState({
-          lat: position.coords.latitude, 
-          lng: position.coords.longitude              // use Geocoding API here
-        });
-      });
-    } else {
-      this.setState({
-        lat: 40.7128,
-        lng: -74.0060
-      });
+    let businessQuery = "";
+    let locationQuery = "New York, New York";
+    if (this.props.location.search) {
+      const searchParams = new URLSearchParams(this.props.location.search);
+      businessQuery = searchParams.get("q");
+      locationQuery = searchParams.get("loc");
     }
+
+    if (!window.google && this.props.onSplash) {
+      this.state = { 
+        isLoadingScript: true,
+        businessQuery,
+        locationQuery
+      };
+      const script = document.createElement('script');
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${APIKey}`;
+      script.addEventListener('load', () => this.setState({
+        isLoadingScript: false
+      }));
+      document.head.append(script);
+    } else {
+      this.state = {
+        isLoadingScript: false,
+        businessQuery,
+        locationQuery
+      };
+    }
+
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   handleSearch(e) {
     e.preventDefault();
-    const { businessQuery, lat, lng } = this.state;
-    this.props.history.push(`/businesses/search?q=${businessQuery}&lat=${lat}&lng=${lng}`);
+    const { businessQuery, locationQuery } = this.state;
+    this.props.history.push(`/businesses/search?q=${businessQuery}&loc=${locationQuery}`);
   }
 
   update(field) {
@@ -40,7 +48,9 @@ class SearchBar extends React.Component {
   }
 
   render() {
-    const { businessQuery, lat, lng } = this.state;
+    if (this.state.isLoadingScript) return null;
+
+    const { businessQuery, locationQuery } = this.state;
     return (
       <form className="search-bar-container" onSubmit={this.handleSearch}>
         <label className="search-business-container">
@@ -56,8 +66,8 @@ class SearchBar extends React.Component {
           <span>Near</span>
           <input 
             type="text" 
-            value={`Lat: ${lat}, long: ${lng}`}
-            onChange={this.update("location")} 
+            value={locationQuery}
+            onChange={this.update("locationQuery")} 
           />
         </label>
         <button className="search-icon-container">

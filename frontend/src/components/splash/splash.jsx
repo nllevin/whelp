@@ -18,7 +18,7 @@ const Splash = () => (
           <span>whelp</span><Link to="/splash"><i className="splash-y-icon"></i></Link>
         </div>
       </div>
-      <SearchBar />
+      <SearchBar onSplash={true} />
       <footer className="splash-footer">
         <span>Gold Coast, Australia</span>
         <span>Photo by <a href="https://unsplash.com/@leio">Leio M.</a></span>

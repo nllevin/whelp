@@ -9,16 +9,10 @@ class SearchMap extends React.Component {
       this.state = { isLoadingScript: true };
       const script = document.createElement('script');
       script.src = `https://maps.googleapis.com/maps/api/js?key=${APIKey}`;
-      script.addEventListener('load', () => this.setState({ 
-        isLoadingScript: false,
-        hasMap: false
-      }));
+      script.addEventListener('load', () => this.setState({ isLoadingScript: false }));
       document.head.append(script);
     } else {
-      this.state = { 
-        isLoadingScript: false,
-        hasMap: false 
-      };
+      this.state = { isLoadingScript: false };
     }
 
     this.markers = {};
@@ -33,33 +27,35 @@ class SearchMap extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.state.hasMap) {
-      this.updateMarkers();
-    } else {
-      this.constructMap();
-    }
+    this.constructMap();
   }
   
   constructMap() {
-    this.setState({ hasMap: true });
     const google = window.google;
-    const { lat, lng } = this.props;
-    const mapOptions = {
-      center: { 
-        lat: parseFloat(lat), 
-        lng: parseFloat(lng) 
-      },
-      disableDefaultUI: true,
-      gestureHandling: "cooperative",
-      keyboardShortcuts: true,
-      zoomControl: true,
-      zoomControlOptions: {
-        position: google.maps.ControlPosition.LEFT_TOP
-      },
-      zoom: 9
-    };
-    this.map = new google.maps.Map(this.mapNode, mapOptions);
-    this.updateMarkers();
+    const geocoder = new google.maps.Geocoder();
+    geocoder.geocode({ address: this.props.loc }, (res, status) => {
+      if (status === "ZERO_RESULTS") {
+        this.props.setBadLocQuery(this.props.loc);
+      } else {
+        const pos = res[0].geometry.location;
+        const mapOptions = {
+          center: { 
+            lat: pos.lat(),
+            lng: pos.lng() 
+          },
+          disableDefaultUI: true,
+          gestureHandling: "cooperative",
+          keyboardShortcuts: true,
+          zoomControl: true,
+          zoomControlOptions: {
+            position: google.maps.ControlPosition.LEFT_TOP
+          },
+          zoom: 11
+        };
+        this.map = new google.maps.Map(this.mapNode, mapOptions);
+        this.updateMarkers();
+      }
+    });
   }
 
   createMarker(business, idx) {
@@ -89,6 +85,8 @@ class SearchMap extends React.Component {
       businesses[business._id] = business;
       if (!this.markers[business._id]) {
         this.createMarker(business, idx);
+      } else {
+        this.markers[business._id].setMap(this.map);
       }
     });
     Object.keys(this.markers).forEach(businessId => {

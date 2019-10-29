@@ -9,7 +9,11 @@ import '../reset.css';
 class BusinessIndex extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isMounting: true };
+    this.state = { 
+      isMounting: true,
+      badLocQuery: false
+    };
+    this.setBadLocQuery = this.setBadLocQuery.bind(this);
   }
 
   componentDidMount() {
@@ -19,8 +23,13 @@ class BusinessIndex extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.location.search !== prevProps.location.search) {
+      this.setState({ badLocQuery: false });
       this.props.searchBusinesses(this.props.location.search);
     }
+  }
+
+  setBadLocQuery(badLocQuery) {
+    this.setState({ badLocQuery });
   }
 
   render() {
@@ -57,20 +66,39 @@ class BusinessIndex extends React.Component {
       </main>
     );
 
+    const badLocMessage = (
+      <div className="bad-loc-msg">
+        <h3>Sorry, but we didn't understand the location you entered.</h3>
+        <p>We accept locations in the following forms:</p>
+        <ul>
+          <li>706 Mission St, San Francisco, CA</li>
+          <li>San Francisco, CA</li>
+          <li>San Francisco, CA 94103</li>
+          <li>94103</li>
+        </ul>
+        <p>Also, it's possible we don't have a listing for {this.state.badLocQuery}. In that case, you should try adding a zip, or try a larger nearby city.</p>
+      </div>
+    );
+
     return (
       <div className="business-index-container">
         <HeaderNav />
-        <div className="business-index-content-container">
-          {businesses.length === 0 ? noResultsDisplay : resultsDisplay}
-          <aside className="business-index-sidebar">
-            <SearchMap 
-              businesses={businesses}
-              lat={searchParams.get("lat")}
-              lng={searchParams.get("lng")}
-              history={history}
-            />
-          </aside>
-        </div>
+        {
+          this.state.badLocQuery ? 
+            badLocMessage : (
+              <div className="business-index-content-container">
+                {businesses.length === 0 ? noResultsDisplay : resultsDisplay}
+                <aside className="business-index-sidebar">
+                  <SearchMap 
+                    businesses={businesses}
+                    loc={searchParams.get("loc")}
+                    setBadLocQuery={this.setBadLocQuery}
+                    history={history}
+                  />
+                </aside>
+              </div>
+            )
+        }
       </div>
     );
   }
