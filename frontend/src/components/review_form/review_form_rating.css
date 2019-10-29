@@ -1,0 +1,40 @@
+[class^="review-form-half-stars-"] {
+  background-image: url("../../public/stars.png");
+  width: 162px;
+  height: 30px;
+  background-size: 162px 691px;
+  margin-right: 6px;
+  display: flex;
+}
+
+.review-form-half-stars-2 {
+  background-position-y: -30px;
+}
+
+.review-form-half-stars-4 {
+  background-position-y: calc(-29px - 2 * 30px);
+}
+
+.review-form-half-stars-6 {
+  background-position-y: calc(-28px - 4 * 30px);
+}
+
+.review-form-half-stars-8 {
+  background-position-y: calc(-27px - 6 * 30px);
+}
+
+.review-form-half-stars-10 {
+  background-position-y: calc(-27px - 8 * 30px);
+}
+
+.review-form-star-select-option {
+  height: 30px;
+  width: 30px;
+  margin-right: 3px;
+  cursor: pointer;
+}
+
+.review-form-rating-message {
+  font-size: 14px;
+  line-height: 1.28571em;
+}

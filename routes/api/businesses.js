@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Business = require('../../models/Business');
 const Review = require('../../models/Review');
+const User = require('../../models/User');
 
 // business#index
 router.post('/search', (req, res) => {
@@ -64,18 +65,30 @@ router.get('/:id', (req, res) => {
     .findById(req.params.id)
     .then(business => {
       Review
-        .find({businessId: business.id})
+        .find({ businessId: business.id })
         .then(reviewsArray => {
           const reviews = {};
+          const authorIds = []
+
           reviewsArray.forEach(review => {
             reviews[review.id] = review;
+            authorIds.push(review.authorId);
           });
-          res.json({
-            business,
-            reviews
-          });
+          User
+            .find()
+            .where('_id')
+            .in(authorIds)
+            .then(authors => {
+              const users = {};
+              authors.forEach(author => users[author.id] = author);
+              res.json({
+                business,
+                reviews,
+                users
+              });
+            }
+            );
         })
-        .catch(err => res.status(404).json({ noreviewsfound: "No reviews found for that business"})); // This doesn't seem right. Some businesses won't have reviews
     })
     .catch(err => res.status(404).json({ nobusinessfound: "No business found with that ID" }));
 });
