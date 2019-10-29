@@ -5,8 +5,9 @@ const Review = require('../../models/Review');
 const User = require('../../models/User');
 
 // business#index
-router.get('/search', (req, res) => {
-  const query = req.query['q'];
+router.post('/search', (req, res) => {
+  const query = req.body.query;
+  const bounds = req.body.bounds;
   Review
     .aggregate([ 
       { $match: { $text: { $search: query } } },
@@ -19,7 +20,11 @@ router.get('/search', (req, res) => {
       const queryWords = query.toLowerCase().split(" ");
 
       Business
-        .find( { _id: { $in: searchResults } } )
+        .find({ 
+          _id: { $in: searchResults },
+          lat: { $gt: bounds.southWest.lat, $lt: bounds.northEast.lat },
+          lng: { $gt: bounds.southWest.lng, $lt: bounds.northEast.lng } 
+        })
         .populate("reviews")
         .then(businessesArray => {
           businessesArray.forEach(business => {
@@ -33,6 +38,8 @@ router.get('/search', (req, res) => {
               _id: business.id,
               name: business.name,
               address: business.address,
+              lat: business.lat,
+              lng: business.lng,
               phoneNumber: business.phoneNumber,
               schedules: business.schedules,
               priceRating: business.priceRating,
@@ -44,7 +51,7 @@ router.get('/search', (req, res) => {
           });
           res.json({
             businesses,
-            searchResults
+            searchResults: searchResults.filter(businessId => businesses[businessId])
           });
         })
         .catch(err => console.log(err));

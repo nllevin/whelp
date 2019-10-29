@@ -2,30 +2,106 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import HeaderNav from '../header_nav/header_nav';
 import BusinessIndexItem from './business_index_item';
-import './business_index.css';
+import SearchMap from './search_map';
 import '../reset.css';
+import './business_index.css';
+const APIKey = require('../../config/keys').googleAPI;
 
 class BusinessIndex extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isMounting: true };
-  }
-  componentDidMount() {
-    this.props.searchBusinesses(this.props.location.search);
-    this.setState({ isMounting: false });
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.location.search !== prevProps.location.search) {
-      this.props.searchBusinesses(this.props.location.search);
+    this.triggerSearch = this.triggerSearch.bind(this);
+    if (!window.google) {
+      this.state = { 
+        isLoadingScript: true,
+        isSearching: true,
+        isFetchingCoords: true,
+        badLocQuery: false,
+        lat: "",
+        lng: ""
+      };
+      const script = document.createElement('script');
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${APIKey}`;
+      script.addEventListener('load', () => this.setState({ isLoadingScript: false }));
+      document.head.append(script);
+    } else {
+      this.state = { 
+        isLoadingScript: false,
+        isSearching: true,
+        isFetchingCoords: true,
+        badLocQuery: false,
+        lat: "",
+        lng: ""
+      };
     }
   }
 
-  render() {
-    if (this.state.isMounting) return null;
+  componentDidMount() {
+    if (window.google) {
+      this.fetchCoordsAndSearch();
+    }
+  }
 
-    const { businesses } = this.props;
-    const noResultsDisplay = (
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      (prevState.isLoadingScript && !this.state.isLoadingScript)
+      || (window.google && this.props.location.search !== prevProps.location.search)
+    ) {
+      this.setState({ isFetchingCoords: true, isSearching: true }, () => {
+        this.fetchCoordsAndSearch(prevProps)
+      });
+    }
+  }
+
+  fetchCoordsAndSearch(prevProps = { location: { search: "" } }) {
+    const google = window.google;
+    const searchParams = new URLSearchParams(this.props.location.search);
+    const oldSearchParams = new URLSearchParams(prevProps.location.search);
+    if (
+      (searchParams.get("loc") !== oldSearchParams.get("loc"))
+      || (!this.state.lat || !this.state.lng) 
+    ) { 
+      const geocoder = new google.maps.Geocoder();
+      geocoder.geocode({ address: searchParams.get("loc") }, (res, status) => {
+        if (status === "ZERO_RESULTS") {
+          this.setState({
+            isFetchingCoords: false,
+            isSearching: false,
+            badLocQuery: searchParams.get("loc"),
+            lat: "",
+            lng: ""
+          });
+        } else {
+          const pos = res[0].geometry.location;
+          this.setState({
+            isFetchingCoords: false,
+            badLocQuery: false,
+            lat: pos.lat(),
+            lng: pos.lng()
+          });
+        }
+      });
+    }
+  }
+
+  triggerSearch(bounds) {
+    const searchParams = {
+      query: (new URLSearchParams(this.props.location.search).get("q")),
+      bounds
+    };
+    this.props.searchBusinesses(searchParams)
+      .then(() => this.setState({ isSearching: false }));
+  }
+
+  render() {
+    if (this.state.isLoadingScript || this.state.isFetchingCoords) return null;
+
+    const { businesses, history } = this.props;
+    const { lat, lng, badLocQuery, isSearching } = this.state;
+    const searchParams = new URLSearchParams(this.props.location.search);
+    const queryWords = searchParams.get("q").toLowerCase().split(" ");
+
+    const noSearchResults = (
         <div className="business-index-content no-search-results">
           <h4>Suggestions for improving the results:</h4>
           <p>Try a different location.</p>
@@ -33,8 +109,8 @@ class BusinessIndex extends React.Component {
           <p>Try a more general search, e.g. "pizza" instead of "pepperoni".</p>
         </div>
     );
-
-    const resultsDisplay = (
+    
+    const searchResults = (
       <main className="business-index-content">
         <h2>All Results</h2>
         <ul>
@@ -44,6 +120,7 @@ class BusinessIndex extends React.Component {
                 key={business._id}
                 idx={idx}
                 business={business}
+                queryWords={queryWords}
               />
             ))
           }
@@ -51,15 +128,42 @@ class BusinessIndex extends React.Component {
       </main>
     );
 
+    const resultsDisplay = businesses.length === 0 ? noSearchResults : searchResults;
+
+    const badLocMessage = (
+      <div className="bad-loc-msg">
+        <h3>Sorry, but we didn't understand the location you entered.</h3>
+        <p>We accept locations in the following forms:</p>
+        <ul>
+          <li>706 Mission St, San Francisco, CA</li>
+          <li>San Francisco, CA</li>
+          <li>San Francisco, CA 94103</li>
+          <li>94103</li>
+        </ul>
+        <p>Also, it's possible we don't have a listing for {this.state.badLocQuery}. In that case, you should try adding a zip, or try a larger nearby city.</p>
+      </div>
+    );
     return (
       <div className="business-index-container">
         <HeaderNav />
-        <div className="business-index-content-container">
-          {businesses.length === 0 ? noResultsDisplay : resultsDisplay}
-          <aside className="business-index-sidebar">
-            <span>map and ads go here</span>
-          </aside>
-        </div>
+        {
+          badLocQuery ? 
+            badLocMessage : (
+              <div className="business-index-content-container">
+                { isSearching ? <main className="business-index-content"></main> : resultsDisplay }
+                <aside className="business-index-sidebar">
+                  <SearchMap 
+                    businesses={businesses}
+                    lat={lat}
+                    lng={lng}
+                    history={history}
+                    triggerSearch={this.triggerSearch}
+                    isSearching={isSearching}
+                  />
+                </aside>
+              </div>
+            )
+        }
       </div>
     );
   }
