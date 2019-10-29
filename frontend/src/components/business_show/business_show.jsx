@@ -266,7 +266,7 @@ class BusinessShow extends React.Component {
 
                       className="review-creator-link" 
                       to={`/businesses/${business._id}/review/0`}>
-                      Start your review of<strong>{business.name}</strong>.
+                      Start your review of<strong> {business.name}</strong>.
                     </Link>
                   </div>
                     : <div className="review-index-item-content">

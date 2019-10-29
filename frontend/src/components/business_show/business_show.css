@@ -196,7 +196,9 @@
 
 .review-creator-link > strong {
   font-weight: bold;
-  margin-left: 5px;
+  white-space: pre;
+  position: relative;
+  top: -1px;
 }
 
 .review-creator-link:hover {
