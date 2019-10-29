@@ -10,6 +10,11 @@ const Footer = () => (
         <h3>About</h3>
         <a href="https://github.com/nllevin/whelp">About Whelp</a>
       </div>
+      <div className="footer-column">
+        <h3>Github</h3>
+        <a href="https://github.com/nllevin">Noah Levin</a>
+        <a href="https://github.com/Patrick-Mondala">Patrick Mondala</a>
+      </div>
     </div>
     <figure className="footer-cityscape" />
   </div>
