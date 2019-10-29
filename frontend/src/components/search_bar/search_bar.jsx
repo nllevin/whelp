@@ -14,25 +14,10 @@ class SearchBar extends React.Component {
       locationQuery = searchParams.get("loc");
     }
 
-    if (!window.google && this.props.onSplash) {
-      this.state = { 
-        isLoadingScript: true,
-        businessQuery,
-        locationQuery
-      };
-      const script = document.createElement('script');
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${APIKey}`;
-      script.addEventListener('load', () => this.setState({
-        isLoadingScript: false
-      }));
-      document.head.append(script);
-    } else {
-      this.state = {
-        isLoadingScript: false,
-        businessQuery,
-        locationQuery
-      };
-    }
+    this.state = { 
+      businessQuery,
+      locationQuery
+    };
 
     this.handleSearch = this.handleSearch.bind(this);
   }
@@ -48,8 +33,6 @@ class SearchBar extends React.Component {
   }
 
   render() {
-    if (this.state.isLoadingScript) return null;
-
     const { businessQuery, locationQuery } = this.state;
     return (
       <form className="search-bar-container" onSubmit={this.handleSearch}>
