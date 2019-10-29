@@ -38,6 +38,7 @@ import '../reset.css';
 import './business_show.css';
 import './business_rating.css';
 import '../review_index/review_index.css';
+const APIKey = require('../../config/keys').googleAPI;
 
 class BusinessShow extends React.Component {
   constructor(props) {
@@ -45,7 +46,8 @@ class BusinessShow extends React.Component {
     this.state = { 
       rating: 0, 
       carouselArray: 
-        this.shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30])}
+        this.shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30])
+    };
     this.resetRatingToSelected = this.resetRatingToSelected.bind(this);
   }
 
@@ -53,6 +55,16 @@ class BusinessShow extends React.Component {
     this._isMounted = true;
     if (this.props.match.params.businessId) 
       this.props.fetchBusinessAndReviewsWithAuthors(this.props.match.params.businessId)
+        .then(() => {
+          if (!window.google) {
+            const script = document.createElement('script');
+            script.src = `https://maps.googleapis.com/maps/api/js?key=${APIKey}`;
+            script.addEventListener('load', () => this.constructMap());
+            document.head.append(script);
+          } else {
+            this.constructMap();
+          }
+        })
         .catch(() => this.props.history.push("/splash"));
   }
 
@@ -64,6 +76,25 @@ class BusinessShow extends React.Component {
 
   componentWillUnmount() {
     this._isMounted = false;
+  }
+
+  constructMap() {
+    const google = window.google;
+    const { business } = this.props;
+    const mapOptions = {
+      center: {
+        lat: parseFloat(business.lat),
+        lng: parseFloat(business.lng)
+      },
+      disableDefaultUI: true,
+      zoom: 15
+    };
+    const map = new google.maps.Map(this.mapNode, mapOptions);
+    const position = new google.maps.LatLng(business.lat, business.lng);
+    new google.maps.Marker({
+      position,
+      map
+    });
   }
 
   hoverRating(rating) {
@@ -165,6 +196,8 @@ class BusinessShow extends React.Component {
 
   render() {
     const { business, currentUser, currentUserReview } = this.props;
+    if (!business.address) return null;
+
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const today = new Date();
     const currentDay = days[today.getDay()];
@@ -200,11 +233,10 @@ class BusinessShow extends React.Component {
               <h3 className="business-show-location-and-search-container-header">Location & Hours</h3>
               <div className="business-show-location-and-schedule-content">
                 <div className="business-show-location-container">
-                  <div className="business-show-location-map">
-                    what's a map? it's right there
-                  </div>
+                  <div className="business-show-location-map" ref={map => this.mapNode = map}></div>
                   <div className="business-show-location-address">
-                    <p>{business.address}</p>
+                    <p>{business.address.split(",")[0]}</p>
+                    <p>{business.address.split(",").slice(1).join(",")}</p>
                   </div>
                 </div>
                 <div className="business-show-schedule-container">
