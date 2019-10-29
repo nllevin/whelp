@@ -88,6 +88,9 @@ class BusinessShow extends React.Component {
         lng: parseFloat(business.lng)
       },
       disableDefaultUI: true,
+      gestureHandling: "none",
+      draggableCursor: "default",
+      clickableIcons: false,
       zoom: 15
     };
     const map = new google.maps.Map(this.mapNode, mapOptions);

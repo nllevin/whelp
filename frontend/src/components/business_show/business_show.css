@@ -90,17 +90,15 @@
   height: 150px;
 }
 
+.business-show-location-map img {
+  cursor: default;
+}
+
 .business-show-location-address {
   height: 58px;
   border-top: 1px solid #e6e6e6; /* remove this border later, doesn't actually exist */
   padding: 12px;
   font-size: 14px;
-}
-
-.business-show-location-map { /* replace this entire thing with real map css */
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .business-show-schedule-list {
