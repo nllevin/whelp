@@ -75,7 +75,7 @@ class ReviewForm extends React.Component {
   }
 
   render() {
-    const { business } = this.props;
+    const { business, formType } = this.props;
 
     return (
       <div className="review-form-content-container">
@@ -120,7 +120,7 @@ class ReviewForm extends React.Component {
             </form>
             <button
               className="review-form-submit-button"
-              onClick={this.handleSubmit}>Post Review</button>
+              onClick={this.handleSubmit}>{formType === 'edit' ? "Edit" : "Post"} Review</button>
           </div>
         </div>
       </div>
