@@ -12,7 +12,8 @@ import BusinessIndexContainer from './business_index/business_index_container';
 import Footer from './footer/footer';
 
 const App = () => (
-  <Switch>
+  <div>
+    <Switch>
       <AuthRoute path='/login' component={LoginForm} />
       <AuthRoute path='/signup' component={SignupForm} />
       <Route path='/businesses/search' component={BusinessIndexContainer} />

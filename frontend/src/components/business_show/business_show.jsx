@@ -42,7 +42,10 @@ import '../review_index/review_index.css';
 class BusinessShow extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {rating: 0}
+    this.state = { 
+      rating: 0, 
+      carouselArray: 
+        this.shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30])}
     this.resetRatingToSelected = this.resetRatingToSelected.bind(this);
   }
 
@@ -170,7 +173,7 @@ class BusinessShow extends React.Component {
       <div className="business-show-container">
         <HeaderNav />
         <Carousel className="business-show-carousel" slidesToShow={4} cellSpacing={2} slidesToScroll={4}>
-          {this.shuffle([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]).map(
+          {this.state.carouselArray.map(
             num => <img
               key={`carousel-img-${num}`}
               className="business-show-carousel-img"
