@@ -251,7 +251,7 @@ class BusinessShow extends React.Component {
                       <tr key={`schedule-item-${schedule._id}`} className="business-show-schedule-trst-item">
                         <th className="business-show-schedule-day">{schedule.day.slice(0, 3)}</th>
                         <td className="business-show-schedule-time">{parseInt(schedule.startTime) < 12 ? schedule.startTime + " am" : (parseInt(schedule.startTime.slice(0,2)) - 12) + schedule.startTime.slice(2) + " pm"} - {parseInt(schedule.endTime) < 12 ? schedule.endTime + " am" : (parseInt(schedule.endTime.slice(0,2)) - 12) + schedule.endTime.slice(2) + " pm"}</td>
-                        <td className="business-show-schedule-open-now">{currentDay === schedule.day && parseInt(schedule.startTime) < parseInt(currentTime) && parseInt(currentTime) < parseInt(schedule.endTime) ? "Open now" : null}</td>
+                        <td className="business-show-schedule-open-message">{currentDay === schedule.day ? (parseInt(schedule.startTime) < parseInt(currentTime) && parseInt(currentTime) < parseInt(schedule.endTime) ? <span className="business-show-schedule-open-now">Open now</span> : <span className="business-show-schedule-closed-now">Closed now</span>) : null}</td>
                       </tr>
                     ) : null}
                     </tbody>
@@ -357,6 +357,9 @@ class BusinessShow extends React.Component {
             <ul className="business-show-sidebar-list">
               {business.phoneNumber ? <li><i className="fas fa-phone-alt business-sidebar-phone-icon"></i>{business.phoneNumber}</li> : null}
               {business.address ? <li><i className="fas fa-directions business-sidebar-directions-icon"></i>{business.address}</li> : null}
+              <li><i className="fab fa-github"></i><a className="project-link" href="https://github.com/nllevin/whelp">Github Repository</a></li>
+              <li><i className="fab fa-github-square"></i><a className="project-link" href="https://github.com/Patrick-Mondala">Patrick Mondala</a></li>
+              <li><i className="fab fa-github-square"></i><a className="project-link" href="https://github.com/nllevin">Noah Levin</a></li>
             </ul>
           </aside>
         </div>
