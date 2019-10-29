@@ -257,3 +257,17 @@
   align-items: center;
   margin-bottom: 15px;
 }
+
+.business-show-rating-container {
+  display: flex;
+  align-items: center;
+}
+
+.business-show-carousel {
+  height: 220px;
+}
+
+.business-show-carousel-img {
+  height: 220px;
+  object-fit: cover;
+}
