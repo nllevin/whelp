@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  db:
+    image: mongo
+    env_file:
+      - .env
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nllevin/whelp
+    expose:
+      - 5000
+    volumes:
+      - .:/whelp
+    env_file:
+      - .env
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
