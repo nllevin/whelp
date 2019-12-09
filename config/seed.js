@@ -10,17 +10,14 @@ const fs = require('fs');
 
 const filePath = path.resolve(__dirname, 'city_of_new_york.csv');
 
-
 const seed = async function() {
   await mongoose
     .connect(db, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
     .then(() => console.log("Connected to MongoDB successfully. Ready to seed"))
     .catch(err => console.log(err));
 
-  let NYCAddresses;
-  await fs.readFile(filePath, { encoding: "utf-8" }, (err, data) => {
-    NYCAddresses = data.split("\n").slice(1);
-  });
+  const data = fs.readFileSync(filePath, { encoding: "utf-8" });
+  const NYCAddresses = data.split("\n").slice(1);
 
   // delete old documents, create new arrays
   await Promise.all([
