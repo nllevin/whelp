@@ -49,3 +49,4 @@ frontend/yarn-error.log*
 
 frontend/src/config/keys_dev.js
 .env
+/frontend/.env

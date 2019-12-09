@@ -3,4 +3,9 @@
 .DS_Store
 /config/test.js
 /config/city_of_new_york.csv
+/frontend/.env
 .env
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep

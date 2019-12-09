@@ -2,20 +2,12 @@ version: "3"
 
 services:
   db:
-    image: mongo
-    env_file:
-      - .env
-    volumes:
-      - ./tmp/db:/var/lib/postgresql/data
+    image: mongo:4.2
+    restart: always
   web:
     build:
       context: .
-      dockerfile: Dockerfile
-    image: nllevin/whelp
-    expose:
-      - 5000
-    volumes:
-      - .:/whelp
+    image: nllevin/whelp:1 
     env_file:
       - .env
     ports:
