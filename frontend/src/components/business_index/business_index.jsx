@@ -101,7 +101,12 @@ class BusinessIndex extends React.Component {
 
   render() {
     // debugger;
-    if (this.state.isLoadingScript || this.state.isFetchingCoords) return null;
+    if (this.state.isLoadingScript || this.state.isFetchingCoords) return (
+      <div>
+        <HeaderNav />
+        <div className="business-index-content-container"></div>
+      </div>
+    );
 
     const { businesses, history } = this.props;
     const { lat, lng, badLocQuery, isSearching } = this.state;

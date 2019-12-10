@@ -3,6 +3,7 @@
   margin: 0 auto;
   width: 1020px;
   display: flex;
+  min-height: 381px;
 }
 
 .business-index-content {
