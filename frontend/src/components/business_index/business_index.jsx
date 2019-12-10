@@ -47,7 +47,7 @@ class BusinessIndex extends React.Component {
       (prevState.isLoadingScript && !this.state.isLoadingScript)
       || (window.google && this.props.location.search !== prevProps.location.search)
     ) {
-      this.setState({ isFetchingCoords: true, isSearching: true }, () => {
+      this.setState({ isFetchingCoords: true }, () => {
         this.fetchCoordsAndSearch(prevProps)
       });
     }
@@ -66,7 +66,6 @@ class BusinessIndex extends React.Component {
         if (status === "ZERO_RESULTS") {
           this.setState({
             isFetchingCoords: false,
-            isSearching: false,
             badLocQuery: searchParams.get("loc"),
             lat: "",
             lng: ""
@@ -75,25 +74,33 @@ class BusinessIndex extends React.Component {
           const pos = res[0].geometry.location;
           this.setState({
             isFetchingCoords: false,
+            isSearching: true,
             badLocQuery: false,
             lat: pos.lat(),
             lng: pos.lng()
           });
         }
       });
+    } else {
+      this.triggerSearch();
     }
   }
 
-  triggerSearch(bounds) {
+  triggerSearch(bounds = this.state.bounds) {
     const searchParams = {
       query: (new URLSearchParams(this.props.location.search).get("q")),
       bounds
     };
     this.props.searchBusinesses(searchParams)
-      .then(() => this.setState({ isSearching: false }));
+      .then(() => this.setState({ 
+        isSearching: false, 
+        isFetchingCoords: false,
+        bounds 
+      }));
   }
 
   render() {
+    // debugger;
     if (this.state.isLoadingScript || this.state.isFetchingCoords) return null;
 
     const { businesses, history } = this.props;
