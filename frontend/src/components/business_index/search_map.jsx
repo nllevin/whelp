@@ -73,11 +73,13 @@ class SearchMap extends React.Component {
         northEast: { lat: northEast.lat(), lng: northEast.lng() }
       });
     } 
-    this.updateMarkers();
   }
 
   updateMarkers() {
-    this.markers = {};
+    for (let key in this.markers) {
+      this.markers[key].setMap(null);
+      delete this.markers[key];
+    }
     this.props.businesses.forEach((business, idx) => {
       this.createMarker(business, idx);
     });
