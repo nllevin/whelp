@@ -358,8 +358,8 @@ class BusinessShow extends React.Component {
               {business.phoneNumber ? <li><i className="fas fa-phone-alt business-sidebar-phone-icon"></i>{business.phoneNumber}</li> : null}
               {business.address ? <li><i className="fas fa-directions business-sidebar-directions-icon"></i>{business.address}</li> : null}
             </ul>
-            <a href="https://github.com/Patrick-Mondala"></a>
-            <a href="https://github.com/nllevin"></a>
+            <a id="github-ad-patrick-mondala" href="https://github.com/Patrick-Mondala"> </a>
+            <a id="github-ad-noah-levin" href="https://github.com/nllevin"> </a>
           </aside>
         </div>
       </div>

@@ -52,7 +52,6 @@
 }
 
 .business-show-sidebar > a {
-  background-image: url("../../public/Octocat.png");
   height: 319px;
   width: 319px;
   background-size: cover;
@@ -60,6 +59,14 @@
   cursor: pointer;
   margin-top: 12px;
   border-radius: 4px;
+}
+
+.business-show-sidebar > a#github-ad-patrick-mondala {
+  background-image: url("../../public/github_ad_patrick.png");
+}
+
+.business-show-sidebar > a#github-ad-noah-levin {
+  background-image: url("../../public/github_ad_noah.png");
 }
 
 .business-show-header {
